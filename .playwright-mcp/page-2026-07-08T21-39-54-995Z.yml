@@ -1,0 +1,922 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - heading "AI Learning Radar" [level=1] [ref=e5]
+    - paragraph [ref=e6]: Turn scattered learning links into a structured, sortable study tracker.
+  - main [ref=e7]:
+    - generic [ref=e8]:
+      - generic [ref=e9]:
+        - generic [ref=e10]: Total articles
+        - generic [ref=e11]: "18"
+      - generic [ref=e12]:
+        - generic [ref=e13]: To Read
+        - generic [ref=e14]: "9"
+      - generic [ref=e15]:
+        - generic [ref=e16]: Completed
+        - generic [ref=e17]: "2"
+      - generic [ref=e18]:
+        - generic [ref=e19]: High priority
+        - generic [ref=e20]: "6"
+      - generic [ref=e21]:
+        - generic [ref=e22]: Today's study time
+        - generic [ref=e23]: 95 min
+    - generic [ref=e24]:
+      - generic [ref=e25]:
+        - heading "Today's Study Plan" [level=2] [ref=e26]
+        - generic [ref=e27]: 95 min total
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - generic [ref=e30]: High priority
+          - link "Building a Coding Agent Loop from Scratch" [ref=e31] [cursor=pointer]:
+            - /url: https://news.ycombinator.com/item?id=39812999
+          - generic [ref=e32]: AI Coding Agents · 35 min
+        - generic [ref=e33]:
+          - generic [ref=e34]: Practical coding
+          - link "Prompt Caching Explained for Agent Builders" [ref=e35] [cursor=pointer]:
+            - /url: https://news.ycombinator.com/item?id=39814000
+          - generic [ref=e36]: AI Coding Agents · 15 min
+        - generic [ref=e37]:
+          - generic [ref=e38]: Leadership / system design
+          - link "Schema Design for Airtable-like Apps at Scale" [ref=e39] [cursor=pointer]:
+            - /url: https://news.ycombinator.com/item?id=39814222
+          - generic [ref=e40]: Airtable-style Data Modeling · 45 min
+    - generic [ref=e41]:
+      - generic [ref=e42]:
+        - heading "Fetch Suggestions" [level=2] [ref=e43]
+        - paragraph [ref=e44]: Pull article suggestions for a learning focus from Hacker News, DEV.to, and Medium.
+        - generic [ref=e45]:
+          - combobox [ref=e46]:
+            - option "React Performance" [selected]
+            - option "Frontend System Design"
+            - option "TypeScript"
+            - option "AI Coding Agents"
+            - option "Accessibility"
+            - option "Airtable-style Data Modeling"
+          - button "Fetch Suggestions" [ref=e47]
+      - generic [ref=e48]:
+        - heading "Paste a Link or Note" [level=2] [ref=e49]
+        - paragraph [ref=e50]: Paste an article URL or a messy note — it'll be parsed into a row automatically.
+        - generic [ref=e51]:
+          - textbox "https://example.com/article or a quick note about what you read…" [ref=e52]
+          - button "Add to table" [disabled] [ref=e54]
+    - generic [ref=e55]:
+      - generic [ref=e56]:
+        - img [ref=e57]
+        - searchbox "Search titles" [ref=e59]
+      - generic [ref=e60]:
+        - text: Status
+        - combobox "Status" [ref=e61]:
+          - option "All" [selected]
+          - option "To Read"
+          - option "Reading"
+          - option "Summarized"
+          - option "Practiced"
+          - option "Done"
+      - generic [ref=e62]:
+        - text: Topic
+        - combobox "Topic" [ref=e63]:
+          - option "All" [selected]
+          - option "React Performance"
+          - option "Frontend System Design"
+          - option "TypeScript"
+          - option "AI Coding Agents"
+          - option "Accessibility"
+          - option "Airtable-style Data Modeling"
+      - generic [ref=e64]:
+        - text: Difficulty
+        - combobox "Difficulty" [ref=e65]:
+          - option "All" [selected]
+          - option "Beginner"
+          - option "Intermediate"
+          - option "Advanced"
+      - generic [ref=e66]:
+        - text: Priority
+        - combobox "Priority" [ref=e67]:
+          - option "All" [selected]
+          - option "Low"
+          - option "Medium"
+          - option "High"
+      - generic [ref=e68]:
+        - text: Source
+        - combobox "Source" [ref=e69]:
+          - option "All" [selected]
+          - option "Hacker News"
+          - option "DEV.to"
+          - option "Medium"
+          - option "Manual"
+      - generic [ref=e70]:
+        - text: Sort by
+        - combobox "Sort by" [ref=e71]:
+          - option "None" [selected]
+          - option "Priority"
+          - option "Topic"
+          - option "Estimated time"
+      - generic [ref=e72]: 18 of 18 rows
+    - generic [ref=e73]:
+      - table [ref=e74]:
+        - rowgroup [ref=e75]:
+          - row "Title Source Topic Difficulty Priority Status Est. Time (min) Interview Relevance Key Takeaway Next Action Actions" [ref=e76]:
+            - columnheader "Title" [ref=e77]
+            - columnheader "Source" [ref=e78]
+            - columnheader "Topic" [ref=e79]
+            - columnheader "Difficulty" [ref=e80]
+            - columnheader "Priority" [ref=e81]
+            - columnheader "Status" [ref=e82]
+            - columnheader "Est. Time (min)" [ref=e83]
+            - columnheader "Interview Relevance" [ref=e84]
+            - columnheader "Key Takeaway" [ref=e85]
+            - columnheader "Next Action" [ref=e86]
+            - columnheader "Actions" [ref=e87]
+        - rowgroup [ref=e88]:
+          - row "Why React Re-renders and How to Stop Them Edit title and URL for Why React Re-renders and How to Stop Them DEV.to React Performance Intermediate High To Read 25 85 — Read and note render-cause checklist Delete Why React Re-renders and How to Stop Them" [ref=e89]:
+            - cell "Why React Re-renders and How to Stop Them Edit title and URL for Why React Re-renders and How to Stop Them" [ref=e90]:
+              - generic [ref=e91]:
+                - link "Why React Re-renders and How to Stop Them" [ref=e92] [cursor=pointer]:
+                  - /url: https://dev.to/some-author/why-react-re-renders-1a2b
+                - button "Edit title and URL for Why React Re-renders and How to Stop Them" [ref=e93]:
+                  - img [ref=e94]
+            - cell "DEV.to" [ref=e96]:
+              - generic [ref=e97]: DEV.to
+            - cell "React Performance" [ref=e98]:
+              - combobox "Topic for Why React Re-renders and How to Stop Them" [ref=e99] [cursor=pointer]:
+                - option "React Performance" [selected]
+                - option "Frontend System Design"
+                - option "TypeScript"
+                - option "AI Coding Agents"
+                - option "Accessibility"
+                - option "Airtable-style Data Modeling"
+            - cell "Intermediate" [ref=e100]:
+              - combobox "Difficulty for Why React Re-renders and How to Stop Them" [ref=e101] [cursor=pointer]:
+                - option "Beginner"
+                - option "Intermediate" [selected]
+                - option "Advanced"
+            - cell "High" [ref=e102]:
+              - combobox "Priority for Why React Re-renders and How to Stop Them" [ref=e103] [cursor=pointer]:
+                - option "Low"
+                - option "Medium"
+                - option "High" [selected]
+            - cell "To Read" [ref=e104]:
+              - combobox "Status for Why React Re-renders and How to Stop Them" [ref=e105] [cursor=pointer]:
+                - option "To Read" [selected]
+                - option "Reading"
+                - option "Summarized"
+                - option "Practiced"
+                - option "Done"
+            - cell "25" [ref=e106]:
+              - button "25" [ref=e107]
+            - cell "85" [ref=e108]:
+              - button "85" [ref=e109]
+            - cell "—" [ref=e110]:
+              - button "—" [ref=e111]
+            - cell "Read and note render-cause checklist" [ref=e112]:
+              - button "Read and note render-cause checklist" [ref=e113]
+            - cell "Delete Why React Re-renders and How to Stop Them" [ref=e114]:
+              - button "Delete Why React Re-renders and How to Stop Them" [ref=e115]: Delete
+          - row "Designing a Frontend for 10M Concurrent Users Edit title and URL for Designing a Frontend for 10M Concurrent Users Hacker News Frontend System Design Advanced High Reading 40 90 CDN + edge caching reduces origin load significantly Diagram the caching layers discussed Delete Designing a Frontend for 10M Concurrent Users" [ref=e116]:
+            - cell "Designing a Frontend for 10M Concurrent Users Edit title and URL for Designing a Frontend for 10M Concurrent Users" [ref=e117]:
+              - generic [ref=e118]:
+                - link "Designing a Frontend for 10M Concurrent Users" [ref=e119] [cursor=pointer]:
+                  - /url: https://news.ycombinator.com/item?id=39812345
+                - button "Edit title and URL for Designing a Frontend for 10M Concurrent Users" [ref=e120]:
+                  - img [ref=e121]
+            - cell "Hacker News" [ref=e123]:
+              - generic [ref=e124]: Hacker News
+            - cell "Frontend System Design" [ref=e125]:
+              - combobox "Topic for Designing a Frontend for 10M Concurrent Users" [ref=e126] [cursor=pointer]:
+                - option "React Performance"
+                - option "Frontend System Design" [selected]
+                - option "TypeScript"
+                - option "AI Coding Agents"
+                - option "Accessibility"
+                - option "Airtable-style Data Modeling"
+            - cell "Advanced" [ref=e127]:
+              - combobox "Difficulty for Designing a Frontend for 10M Concurrent Users" [ref=e128] [cursor=pointer]:
+                - option "Beginner"
+                - option "Intermediate"
+                - option "Advanced" [selected]
+            - cell "High" [ref=e129]:
+              - combobox "Priority for Designing a Frontend for 10M Concurrent Users" [ref=e130] [cursor=pointer]:
+                - option "Low"
+                - option "Medium"
+                - option "High" [selected]
+            - cell "Reading" [ref=e131]:
+              - combobox "Status for Designing a Frontend for 10M Concurrent Users" [ref=e132] [cursor=pointer]:
+                - option "To Read"
+                - option "Reading" [selected]
+                - option "Summarized"
+                - option "Practiced"
+                - option "Done"
+            - cell "40" [ref=e133]:
+              - button "40" [ref=e134]
+            - cell "90" [ref=e135]:
+              - button "90" [ref=e136]
+            - cell "CDN + edge caching reduces origin load significantly" [ref=e137]:
+              - button "CDN + edge caching reduces origin load significantly" [ref=e138]
+            - cell "Diagram the caching layers discussed" [ref=e139]:
+              - button "Diagram the caching layers discussed" [ref=e140]
+            - cell "Delete Designing a Frontend for 10M Concurrent Users" [ref=e141]:
+              - button "Delete Designing a Frontend for 10M Concurrent Users" [ref=e142]: Delete
+          - row "TypeScript Generics You Actually Need Edit title and URL for TypeScript Generics You Actually Need DEV.to TypeScript Intermediate Medium Summarized 20 70 Constrain generics with extends rather than any Refactor one util function using this pattern Delete TypeScript Generics You Actually Need" [ref=e143]:
+            - cell "TypeScript Generics You Actually Need Edit title and URL for TypeScript Generics You Actually Need" [ref=e144]:
+              - generic [ref=e145]:
+                - link "TypeScript Generics You Actually Need" [ref=e146] [cursor=pointer]:
+                  - /url: https://dev.to/some-author/typescript-generics-3c4d
+                - button "Edit title and URL for TypeScript Generics You Actually Need" [ref=e147]:
+                  - img [ref=e148]
+            - cell "DEV.to" [ref=e150]:
+              - generic [ref=e151]: DEV.to
+            - cell "TypeScript" [ref=e152]:
+              - combobox "Topic for TypeScript Generics You Actually Need" [ref=e153] [cursor=pointer]:
+                - option "React Performance"
+                - option "Frontend System Design"
+                - option "TypeScript" [selected]
+                - option "AI Coding Agents"
+                - option "Accessibility"
+                - option "Airtable-style Data Modeling"
+            - cell "Intermediate" [ref=e154]:
+              - combobox "Difficulty for TypeScript Generics You Actually Need" [ref=e155] [cursor=pointer]:
+                - option "Beginner"
+                - option "Intermediate" [selected]
+                - option "Advanced"
+            - cell "Medium" [ref=e156]:
+              - combobox "Priority for TypeScript Generics You Actually Need" [ref=e157] [cursor=pointer]:
+                - option "Low"
+                - option "Medium" [selected]
+                - option "High"
+            - cell "Summarized" [ref=e158]:
+              - combobox "Status for TypeScript Generics You Actually Need" [ref=e159] [cursor=pointer]:
+                - option "To Read"
+                - option "Reading"
+                - option "Summarized" [selected]
+                - option "Practiced"
+                - option "Done"
+            - cell "20" [ref=e160]:
+              - button "20" [ref=e161]
+            - cell "70" [ref=e162]:
+              - button "70" [ref=e163]
+            - cell "Constrain generics with extends rather than any" [ref=e164]:
+              - button "Constrain generics with extends rather than any" [ref=e165]
+            - cell "Refactor one util function using this pattern" [ref=e166]:
+              - button "Refactor one util function using this pattern" [ref=e167]
+            - cell "Delete TypeScript Generics You Actually Need" [ref=e168]:
+              - button "Delete TypeScript Generics You Actually Need" [ref=e169]: Delete
+          - row "Building a Coding Agent Loop from Scratch Edit title and URL for Building a Coding Agent Loop from Scratch Hacker News AI Coding Agents Advanced High To Read 35 95 — Read and compare against tool-use loop we built Delete Building a Coding Agent Loop from Scratch" [ref=e170]:
+            - cell "Building a Coding Agent Loop from Scratch Edit title and URL for Building a Coding Agent Loop from Scratch" [ref=e171]:
+              - generic [ref=e172]:
+                - link "Building a Coding Agent Loop from Scratch" [ref=e173] [cursor=pointer]:
+                  - /url: https://news.ycombinator.com/item?id=39812999
+                - button "Edit title and URL for Building a Coding Agent Loop from Scratch" [ref=e174]:
+                  - img [ref=e175]
+            - cell "Hacker News" [ref=e177]:
+              - generic [ref=e178]: Hacker News
+            - cell "AI Coding Agents" [ref=e179]:
+              - combobox "Topic for Building a Coding Agent Loop from Scratch" [ref=e180] [cursor=pointer]:
+                - option "React Performance"
+                - option "Frontend System Design"
+                - option "TypeScript"
+                - option "AI Coding Agents" [selected]
+                - option "Accessibility"
+                - option "Airtable-style Data Modeling"
+            - cell "Advanced" [ref=e181]:
+              - combobox "Difficulty for Building a Coding Agent Loop from Scratch" [ref=e182] [cursor=pointer]:
+                - option "Beginner"
+                - option "Intermediate"
+                - option "Advanced" [selected]
+            - cell "High" [ref=e183]:
+              - combobox "Priority for Building a Coding Agent Loop from Scratch" [ref=e184] [cursor=pointer]:
+                - option "Low"
+                - option "Medium"
+                - option "High" [selected]
+            - cell "To Read" [ref=e185]:
+              - combobox "Status for Building a Coding Agent Loop from Scratch" [ref=e186] [cursor=pointer]:
+                - option "To Read" [selected]
+                - option "Reading"
+                - option "Summarized"
+                - option "Practiced"
+                - option "Done"
+            - cell "35" [ref=e187]:
+              - button "35" [ref=e188]
+            - cell "95" [ref=e189]:
+              - button "95" [ref=e190]
+            - cell "—" [ref=e191]:
+              - button "—" [ref=e192]
+            - cell "Read and compare against tool-use loop we built" [ref=e193]:
+              - button "Read and compare against tool-use loop we built" [ref=e194]
+            - cell "Delete Building a Coding Agent Loop from Scratch" [ref=e195]:
+              - button "Delete Building a Coding Agent Loop from Scratch" [ref=e196]: Delete
+          - row "Accessible Modals Without a Library Edit title and URL for Accessible Modals Without a Library DEV.to Accessibility Beginner Medium Practiced 15 60 Trap focus and restore it to the trigger element on close Add regression test for focus return Delete Accessible Modals Without a Library" [ref=e197]:
+            - cell "Accessible Modals Without a Library Edit title and URL for Accessible Modals Without a Library" [ref=e198]:
+              - generic [ref=e199]:
+                - link "Accessible Modals Without a Library" [ref=e200] [cursor=pointer]:
+                  - /url: https://dev.to/some-author/accessible-modals-5e6f
+                - button "Edit title and URL for Accessible Modals Without a Library" [ref=e201]:
+                  - img [ref=e202]
+            - cell "DEV.to" [ref=e204]:
+              - generic [ref=e205]: DEV.to
+            - cell "Accessibility" [ref=e206]:
+              - combobox "Topic for Accessible Modals Without a Library" [ref=e207] [cursor=pointer]:
+                - option "React Performance"
+                - option "Frontend System Design"
+                - option "TypeScript"
+                - option "AI Coding Agents"
+                - option "Accessibility" [selected]
+                - option "Airtable-style Data Modeling"
+            - cell "Beginner" [ref=e208]:
+              - combobox "Difficulty for Accessible Modals Without a Library" [ref=e209] [cursor=pointer]:
+                - option "Beginner" [selected]
+                - option "Intermediate"
+                - option "Advanced"
+            - cell "Medium" [ref=e210]:
+              - combobox "Priority for Accessible Modals Without a Library" [ref=e211] [cursor=pointer]:
+                - option "Low"
+                - option "Medium" [selected]
+                - option "High"
+            - cell "Practiced" [ref=e212]:
+              - combobox "Status for Accessible Modals Without a Library" [ref=e213] [cursor=pointer]:
+                - option "To Read"
+                - option "Reading"
+                - option "Summarized"
+                - option "Practiced" [selected]
+                - option "Done"
+            - cell "15" [ref=e214]:
+              - button "15" [ref=e215]
+            - cell "60" [ref=e216]:
+              - button "60" [ref=e217]
+            - cell "Trap focus and restore it to the trigger element on close" [ref=e218]:
+              - button "Trap focus and restore it to the trigger element on close" [ref=e219]
+            - cell "Add regression test for focus return" [ref=e220]:
+              - button "Add regression test for focus return" [ref=e221]
+            - cell "Delete Accessible Modals Without a Library" [ref=e222]:
+              - button "Delete Accessible Modals Without a Library" [ref=e223]: Delete
+          - row "Modeling Many-to-Many Relations, Airtable Style Edit title and URL for Modeling Many-to-Many Relations, Airtable Style Medium Airtable-style Data Modeling Intermediate Medium Done 30 75 Link tables + rollups beat denormalized join columns None — applied to current schema Delete Modeling Many-to-Many Relations, Airtable Style" [ref=e224]:
+            - cell "Modeling Many-to-Many Relations, Airtable Style Edit title and URL for Modeling Many-to-Many Relations, Airtable Style" [ref=e225]:
+              - generic [ref=e226]:
+                - link "Modeling Many-to-Many Relations, Airtable Style" [ref=e227] [cursor=pointer]:
+                  - /url: https://medium.com/@some-author/airtable-style-modeling-7g8h
+                - button "Edit title and URL for Modeling Many-to-Many Relations, Airtable Style" [ref=e228]:
+                  - img [ref=e229]
+            - cell "Medium" [ref=e231]:
+              - generic [ref=e232]: Medium
+            - cell "Airtable-style Data Modeling" [ref=e233]:
+              - combobox "Topic for Modeling Many-to-Many Relations, Airtable Style" [ref=e234] [cursor=pointer]:
+                - option "React Performance"
+                - option "Frontend System Design"
+                - option "TypeScript"
+                - option "AI Coding Agents"
+                - option "Accessibility"
+                - option "Airtable-style Data Modeling" [selected]
+            - cell "Intermediate" [ref=e235]:
+              - combobox "Difficulty for Modeling Many-to-Many Relations, Airtable Style" [ref=e236] [cursor=pointer]:
+                - option "Beginner"
+                - option "Intermediate" [selected]
+                - option "Advanced"
+            - cell "Medium" [ref=e237]:
+              - combobox "Priority for Modeling Many-to-Many Relations, Airtable Style" [ref=e238] [cursor=pointer]:
+                - option "Low"
+                - option "Medium" [selected]
+                - option "High"
+            - cell "Done" [ref=e239]:
+              - combobox "Status for Modeling Many-to-Many Relations, Airtable Style" [ref=e240] [cursor=pointer]:
+                - option "To Read"
+                - option "Reading"
+                - option "Summarized"
+                - option "Practiced"
+                - option "Done" [selected]
+            - cell "30" [ref=e241]:
+              - button "30" [ref=e242]
+            - cell "75" [ref=e243]:
+              - button "75" [ref=e244]
+            - cell "Link tables + rollups beat denormalized join columns" [ref=e245]:
+              - button "Link tables + rollups beat denormalized join columns" [ref=e246]
+            - cell "None — applied to current schema" [ref=e247]:
+              - button "None — applied to current schema" [ref=e248]
+            - cell "Delete Modeling Many-to-Many Relations, Airtable Style" [ref=e249]:
+              - button "Delete Modeling Many-to-Many Relations, Airtable Style" [ref=e250]: Delete
+          - row "Memoization Pitfalls in Large React Trees Edit title and URL for Memoization Pitfalls in Large React Trees Hacker News React Performance Advanced Medium To Read 20 80 — Read and check against our dashboard perf issue Delete Memoization Pitfalls in Large React Trees" [ref=e251]:
+            - cell "Memoization Pitfalls in Large React Trees Edit title and URL for Memoization Pitfalls in Large React Trees" [ref=e252]:
+              - generic [ref=e253]:
+                - link "Memoization Pitfalls in Large React Trees" [ref=e254] [cursor=pointer]:
+                  - /url: https://news.ycombinator.com/item?id=39813456
+                - button "Edit title and URL for Memoization Pitfalls in Large React Trees" [ref=e255]:
+                  - img [ref=e256]
+            - cell "Hacker News" [ref=e258]:
+              - generic [ref=e259]: Hacker News
+            - cell "React Performance" [ref=e260]:
+              - combobox "Topic for Memoization Pitfalls in Large React Trees" [ref=e261] [cursor=pointer]:
+                - option "React Performance" [selected]
+                - option "Frontend System Design"
+                - option "TypeScript"
+                - option "AI Coding Agents"
+                - option "Accessibility"
+                - option "Airtable-style Data Modeling"
+            - cell "Advanced" [ref=e262]:
+              - combobox "Difficulty for Memoization Pitfalls in Large React Trees" [ref=e263] [cursor=pointer]:
+                - option "Beginner"
+                - option "Intermediate"
+                - option "Advanced" [selected]
+            - cell "Medium" [ref=e264]:
+              - combobox "Priority for Memoization Pitfalls in Large React Trees" [ref=e265] [cursor=pointer]:
+                - option "Low"
+                - option "Medium" [selected]
+                - option "High"
+            - cell "To Read" [ref=e266]:
+              - combobox "Status for Memoization Pitfalls in Large React Trees" [ref=e267] [cursor=pointer]:
+                - option "To Read" [selected]
+                - option "Reading"
+                - option "Summarized"
+                - option "Practiced"
+                - option "Done"
+            - cell "20" [ref=e268]:
+              - button "20" [ref=e269]
+            - cell "80" [ref=e270]:
+              - button "80" [ref=e271]
+            - cell "—" [ref=e272]:
+              - button "—" [ref=e273]
+            - cell "Read and check against our dashboard perf issue" [ref=e274]:
+              - button "Read and check against our dashboard perf issue" [ref=e275]
+            - cell "Delete Memoization Pitfalls in Large React Trees" [ref=e276]:
+              - button "Delete Memoization Pitfalls in Large React Trees" [ref=e277]: Delete
+          - 'row "Micro-frontends: Worth It in 2026? Edit title and URL for Micro-frontends: Worth It in 2026? DEV.to Frontend System Design Intermediate Low To Read 18 55 — Skim for interview talking points Delete Micro-frontends: Worth It in 2026?" [ref=e278]':
+            - 'cell "Micro-frontends: Worth It in 2026? Edit title and URL for Micro-frontends: Worth It in 2026?" [ref=e279]':
+              - generic [ref=e280]:
+                - 'link "Micro-frontends: Worth It in 2026?" [ref=e281] [cursor=pointer]':
+                  - /url: https://dev.to/some-author/microfrontends-2026-9i0j
+                - 'button "Edit title and URL for Micro-frontends: Worth It in 2026?" [ref=e282]':
+                  - img [ref=e283]
+            - cell "DEV.to" [ref=e285]:
+              - generic [ref=e286]: DEV.to
+            - cell "Frontend System Design" [ref=e287]:
+              - 'combobox "Topic for Micro-frontends: Worth It in 2026?" [ref=e288] [cursor=pointer]':
+                - option "React Performance"
+                - option "Frontend System Design" [selected]
+                - option "TypeScript"
+                - option "AI Coding Agents"
+                - option "Accessibility"
+                - option "Airtable-style Data Modeling"
+            - cell "Intermediate" [ref=e289]:
+              - 'combobox "Difficulty for Micro-frontends: Worth It in 2026?" [ref=e290] [cursor=pointer]':
+                - option "Beginner"
+                - option "Intermediate" [selected]
+                - option "Advanced"
+            - cell "Low" [ref=e291]:
+              - 'combobox "Priority for Micro-frontends: Worth It in 2026?" [ref=e292] [cursor=pointer]':
+                - option "Low" [selected]
+                - option "Medium"
+                - option "High"
+            - cell "To Read" [ref=e293]:
+              - 'combobox "Status for Micro-frontends: Worth It in 2026?" [ref=e294] [cursor=pointer]':
+                - option "To Read" [selected]
+                - option "Reading"
+                - option "Summarized"
+                - option "Practiced"
+                - option "Done"
+            - cell "18" [ref=e295]:
+              - button "18" [ref=e296]
+            - cell "55" [ref=e297]:
+              - button "55" [ref=e298]
+            - cell "—" [ref=e299]:
+              - button "—" [ref=e300]
+            - cell "Skim for interview talking points" [ref=e301]:
+              - button "Skim for interview talking points" [ref=e302]
+            - 'cell "Delete Micro-frontends: Worth It in 2026?" [ref=e303]':
+              - 'button "Delete Micro-frontends: Worth It in 2026?" [ref=e304]': Delete
+          - row "Discriminated Unions for Safer State Machines Edit title and URL for Discriminated Unions for Safer State Machines DEV.to TypeScript Intermediate Medium Reading 22 72 — Apply pattern to fetch-status hook Delete Discriminated Unions for Safer State Machines" [ref=e305]:
+            - cell "Discriminated Unions for Safer State Machines Edit title and URL for Discriminated Unions for Safer State Machines" [ref=e306]:
+              - generic [ref=e307]:
+                - link "Discriminated Unions for Safer State Machines" [ref=e308] [cursor=pointer]:
+                  - /url: https://dev.to/some-author/discriminated-unions-1k2l
+                - button "Edit title and URL for Discriminated Unions for Safer State Machines" [ref=e309]:
+                  - img [ref=e310]
+            - cell "DEV.to" [ref=e312]:
+              - generic [ref=e313]: DEV.to
+            - cell "TypeScript" [ref=e314]:
+              - combobox "Topic for Discriminated Unions for Safer State Machines" [ref=e315] [cursor=pointer]:
+                - option "React Performance"
+                - option "Frontend System Design"
+                - option "TypeScript" [selected]
+                - option "AI Coding Agents"
+                - option "Accessibility"
+                - option "Airtable-style Data Modeling"
+            - cell "Intermediate" [ref=e316]:
+              - combobox "Difficulty for Discriminated Unions for Safer State Machines" [ref=e317] [cursor=pointer]:
+                - option "Beginner"
+                - option "Intermediate" [selected]
+                - option "Advanced"
+            - cell "Medium" [ref=e318]:
+              - combobox "Priority for Discriminated Unions for Safer State Machines" [ref=e319] [cursor=pointer]:
+                - option "Low"
+                - option "Medium" [selected]
+                - option "High"
+            - cell "Reading" [ref=e320]:
+              - combobox "Status for Discriminated Unions for Safer State Machines" [ref=e321] [cursor=pointer]:
+                - option "To Read"
+                - option "Reading" [selected]
+                - option "Summarized"
+                - option "Practiced"
+                - option "Done"
+            - cell "22" [ref=e322]:
+              - button "22" [ref=e323]
+            - cell "72" [ref=e324]:
+              - button "72" [ref=e325]
+            - cell "—" [ref=e326]:
+              - button "—" [ref=e327]
+            - cell "Apply pattern to fetch-status hook" [ref=e328]:
+              - button "Apply pattern to fetch-status hook" [ref=e329]
+            - cell "Delete Discriminated Unions for Safer State Machines" [ref=e330]:
+              - button "Delete Discriminated Unions for Safer State Machines" [ref=e331]: Delete
+          - row "Prompt Caching Explained for Agent Builders Edit title and URL for Prompt Caching Explained for Agent Builders Hacker News AI Coding Agents Intermediate High Summarized 15 88 Cache breakpoints must be stable prefixes across turns Check our tool-call ordering for cache breaks Delete Prompt Caching Explained for Agent Builders" [ref=e332]:
+            - cell "Prompt Caching Explained for Agent Builders Edit title and URL for Prompt Caching Explained for Agent Builders" [ref=e333]:
+              - generic [ref=e334]:
+                - link "Prompt Caching Explained for Agent Builders" [ref=e335] [cursor=pointer]:
+                  - /url: https://news.ycombinator.com/item?id=39814000
+                - button "Edit title and URL for Prompt Caching Explained for Agent Builders" [ref=e336]:
+                  - img [ref=e337]
+            - cell "Hacker News" [ref=e339]:
+              - generic [ref=e340]: Hacker News
+            - cell "AI Coding Agents" [ref=e341]:
+              - combobox "Topic for Prompt Caching Explained for Agent Builders" [ref=e342] [cursor=pointer]:
+                - option "React Performance"
+                - option "Frontend System Design"
+                - option "TypeScript"
+                - option "AI Coding Agents" [selected]
+                - option "Accessibility"
+                - option "Airtable-style Data Modeling"
+            - cell "Intermediate" [ref=e343]:
+              - combobox "Difficulty for Prompt Caching Explained for Agent Builders" [ref=e344] [cursor=pointer]:
+                - option "Beginner"
+                - option "Intermediate" [selected]
+                - option "Advanced"
+            - cell "High" [ref=e345]:
+              - combobox "Priority for Prompt Caching Explained for Agent Builders" [ref=e346] [cursor=pointer]:
+                - option "Low"
+                - option "Medium"
+                - option "High" [selected]
+            - cell "Summarized" [ref=e347]:
+              - combobox "Status for Prompt Caching Explained for Agent Builders" [ref=e348] [cursor=pointer]:
+                - option "To Read"
+                - option "Reading"
+                - option "Summarized" [selected]
+                - option "Practiced"
+                - option "Done"
+            - cell "15" [ref=e349]:
+              - button "15" [ref=e350]
+            - cell "88" [ref=e351]:
+              - button "88" [ref=e352]
+            - cell "Cache breakpoints must be stable prefixes across turns" [ref=e353]:
+              - button "Cache breakpoints must be stable prefixes across turns" [ref=e354]
+            - cell "Check our tool-call ordering for cache breaks" [ref=e355]:
+              - button "Check our tool-call ordering for cache breaks" [ref=e356]
+            - cell "Delete Prompt Caching Explained for Agent Builders" [ref=e357]:
+              - button "Delete Prompt Caching Explained for Agent Builders" [ref=e358]: Delete
+          - 'row "Color Contrast Is Not Enough: A11y Beyond WCAG Edit title and URL for Color Contrast Is Not Enough: A11y Beyond WCAG Medium Accessibility Intermediate Low To Read 12 50 — Read during commute Delete Color Contrast Is Not Enough: A11y Beyond WCAG" [ref=e359]':
+            - 'cell "Color Contrast Is Not Enough: A11y Beyond WCAG Edit title and URL for Color Contrast Is Not Enough: A11y Beyond WCAG" [ref=e360]':
+              - generic [ref=e361]:
+                - 'link "Color Contrast Is Not Enough: A11y Beyond WCAG" [ref=e362] [cursor=pointer]':
+                  - /url: https://medium.com/@some-author/a11y-beyond-wcag-3m4n
+                - 'button "Edit title and URL for Color Contrast Is Not Enough: A11y Beyond WCAG" [ref=e363]':
+                  - img [ref=e364]
+            - cell "Medium" [ref=e366]:
+              - generic [ref=e367]: Medium
+            - cell "Accessibility" [ref=e368]:
+              - 'combobox "Topic for Color Contrast Is Not Enough: A11y Beyond WCAG" [ref=e369] [cursor=pointer]':
+                - option "React Performance"
+                - option "Frontend System Design"
+                - option "TypeScript"
+                - option "AI Coding Agents"
+                - option "Accessibility" [selected]
+                - option "Airtable-style Data Modeling"
+            - cell "Intermediate" [ref=e370]:
+              - 'combobox "Difficulty for Color Contrast Is Not Enough: A11y Beyond WCAG" [ref=e371] [cursor=pointer]':
+                - option "Beginner"
+                - option "Intermediate" [selected]
+                - option "Advanced"
+            - cell "Low" [ref=e372]:
+              - 'combobox "Priority for Color Contrast Is Not Enough: A11y Beyond WCAG" [ref=e373] [cursor=pointer]':
+                - option "Low" [selected]
+                - option "Medium"
+                - option "High"
+            - cell "To Read" [ref=e374]:
+              - 'combobox "Status for Color Contrast Is Not Enough: A11y Beyond WCAG" [ref=e375] [cursor=pointer]':
+                - option "To Read" [selected]
+                - option "Reading"
+                - option "Summarized"
+                - option "Practiced"
+                - option "Done"
+            - cell "12" [ref=e376]:
+              - button "12" [ref=e377]
+            - cell "50" [ref=e378]:
+              - button "50" [ref=e379]
+            - cell "—" [ref=e380]:
+              - button "—" [ref=e381]
+            - cell "Read during commute" [ref=e382]:
+              - button "Read during commute" [ref=e383]
+            - 'cell "Delete Color Contrast Is Not Enough: A11y Beyond WCAG" [ref=e384]':
+              - 'button "Delete Color Contrast Is Not Enough: A11y Beyond WCAG" [ref=e385]': Delete
+          - row "Schema Design for Airtable-like Apps at Scale Edit title and URL for Schema Design for Airtable-like Apps at Scale Hacker News Airtable-style Data Modeling Advanced High Reading 45 92 EAV tables trade query simplicity for write complexity Sketch our repository interface against this model Delete Schema Design for Airtable-like Apps at Scale" [ref=e386]:
+            - cell "Schema Design for Airtable-like Apps at Scale Edit title and URL for Schema Design for Airtable-like Apps at Scale" [ref=e387]:
+              - generic [ref=e388]:
+                - link "Schema Design for Airtable-like Apps at Scale" [ref=e389] [cursor=pointer]:
+                  - /url: https://news.ycombinator.com/item?id=39814222
+                - button "Edit title and URL for Schema Design for Airtable-like Apps at Scale" [ref=e390]:
+                  - img [ref=e391]
+            - cell "Hacker News" [ref=e393]:
+              - generic [ref=e394]: Hacker News
+            - cell "Airtable-style Data Modeling" [ref=e395]:
+              - combobox "Topic for Schema Design for Airtable-like Apps at Scale" [ref=e396] [cursor=pointer]:
+                - option "React Performance"
+                - option "Frontend System Design"
+                - option "TypeScript"
+                - option "AI Coding Agents"
+                - option "Accessibility"
+                - option "Airtable-style Data Modeling" [selected]
+            - cell "Advanced" [ref=e397]:
+              - combobox "Difficulty for Schema Design for Airtable-like Apps at Scale" [ref=e398] [cursor=pointer]:
+                - option "Beginner"
+                - option "Intermediate"
+                - option "Advanced" [selected]
+            - cell "High" [ref=e399]:
+              - combobox "Priority for Schema Design for Airtable-like Apps at Scale" [ref=e400] [cursor=pointer]:
+                - option "Low"
+                - option "Medium"
+                - option "High" [selected]
+            - cell "Reading" [ref=e401]:
+              - combobox "Status for Schema Design for Airtable-like Apps at Scale" [ref=e402] [cursor=pointer]:
+                - option "To Read"
+                - option "Reading" [selected]
+                - option "Summarized"
+                - option "Practiced"
+                - option "Done"
+            - cell "45" [ref=e403]:
+              - button "45" [ref=e404]
+            - cell "92" [ref=e405]:
+              - button "92" [ref=e406]
+            - cell "EAV tables trade query simplicity for write complexity" [ref=e407]:
+              - button "EAV tables trade query simplicity for write complexity" [ref=e408]
+            - cell "Sketch our repository interface against this model" [ref=e409]:
+              - button "Sketch our repository interface against this model" [ref=e410]
+            - cell "Delete Schema Design for Airtable-like Apps at Scale" [ref=e411]:
+              - button "Delete Schema Design for Airtable-like Apps at Scale" [ref=e412]: Delete
+          - 'row "React Compiler: What Actually Changes for You Edit title and URL for React Compiler: What Actually Changes for You DEV.to React Performance Beginner Medium Done 10 65 Compiler memoizes automatically; manual useMemo often redundant None Delete React Compiler: What Actually Changes for You" [ref=e413]':
+            - 'cell "React Compiler: What Actually Changes for You Edit title and URL for React Compiler: What Actually Changes for You" [ref=e414]':
+              - generic [ref=e415]:
+                - 'link "React Compiler: What Actually Changes for You" [ref=e416] [cursor=pointer]':
+                  - /url: https://dev.to/some-author/react-compiler-5o6p
+                - 'button "Edit title and URL for React Compiler: What Actually Changes for You" [ref=e417]':
+                  - img [ref=e418]
+            - cell "DEV.to" [ref=e420]:
+              - generic [ref=e421]: DEV.to
+            - cell "React Performance" [ref=e422]:
+              - 'combobox "Topic for React Compiler: What Actually Changes for You" [ref=e423] [cursor=pointer]':
+                - option "React Performance" [selected]
+                - option "Frontend System Design"
+                - option "TypeScript"
+                - option "AI Coding Agents"
+                - option "Accessibility"
+                - option "Airtable-style Data Modeling"
+            - cell "Beginner" [ref=e424]:
+              - 'combobox "Difficulty for React Compiler: What Actually Changes for You" [ref=e425] [cursor=pointer]':
+                - option "Beginner" [selected]
+                - option "Intermediate"
+                - option "Advanced"
+            - cell "Medium" [ref=e426]:
+              - 'combobox "Priority for React Compiler: What Actually Changes for You" [ref=e427] [cursor=pointer]':
+                - option "Low"
+                - option "Medium" [selected]
+                - option "High"
+            - cell "Done" [ref=e428]:
+              - 'combobox "Status for React Compiler: What Actually Changes for You" [ref=e429] [cursor=pointer]':
+                - option "To Read"
+                - option "Reading"
+                - option "Summarized"
+                - option "Practiced"
+                - option "Done" [selected]
+            - cell "10" [ref=e430]:
+              - button "10" [ref=e431]
+            - cell "65" [ref=e432]:
+              - button "65" [ref=e433]
+            - cell "Compiler memoizes automatically; manual useMemo often redundant" [ref=e434]:
+              - button "Compiler memoizes automatically; manual useMemo often redundant" [ref=e435]
+            - cell "None" [ref=e436]:
+              - button "None" [ref=e437]
+            - 'cell "Delete React Compiler: What Actually Changes for You" [ref=e438]':
+              - 'button "Delete React Compiler: What Actually Changes for You" [ref=e439]': Delete
+          - row "Notes from pasting a Twitter thread on RSC boundaries Edit title and URL for Notes from pasting a Twitter thread on RSC boundaries Manual Frontend System Design Intermediate Medium To Read 15 68 — Reconcile with server/client boundary notes Delete Notes from pasting a Twitter thread on RSC boundaries" [ref=e440]:
+            - cell "Notes from pasting a Twitter thread on RSC boundaries Edit title and URL for Notes from pasting a Twitter thread on RSC boundaries" [ref=e441]:
+              - generic [ref=e442]:
+                - link "Notes from pasting a Twitter thread on RSC boundaries" [ref=e443] [cursor=pointer]:
+                  - /url: https://x.com/someuser/status/1234567890
+                - button "Edit title and URL for Notes from pasting a Twitter thread on RSC boundaries" [ref=e444]:
+                  - img [ref=e445]
+            - cell "Manual" [ref=e447]:
+              - generic [ref=e448]: Manual
+            - cell "Frontend System Design" [ref=e449]:
+              - combobox "Topic for Notes from pasting a Twitter thread on RSC boundaries" [ref=e450] [cursor=pointer]:
+                - option "React Performance"
+                - option "Frontend System Design" [selected]
+                - option "TypeScript"
+                - option "AI Coding Agents"
+                - option "Accessibility"
+                - option "Airtable-style Data Modeling"
+            - cell "Intermediate" [ref=e451]:
+              - combobox "Difficulty for Notes from pasting a Twitter thread on RSC boundaries" [ref=e452] [cursor=pointer]:
+                - option "Beginner"
+                - option "Intermediate" [selected]
+                - option "Advanced"
+            - cell "Medium" [ref=e453]:
+              - combobox "Priority for Notes from pasting a Twitter thread on RSC boundaries" [ref=e454] [cursor=pointer]:
+                - option "Low"
+                - option "Medium" [selected]
+                - option "High"
+            - cell "To Read" [ref=e455]:
+              - combobox "Status for Notes from pasting a Twitter thread on RSC boundaries" [ref=e456] [cursor=pointer]:
+                - option "To Read" [selected]
+                - option "Reading"
+                - option "Summarized"
+                - option "Practiced"
+                - option "Done"
+            - cell "15" [ref=e457]:
+              - button "15" [ref=e458]
+            - cell "68" [ref=e459]:
+              - button "68" [ref=e460]
+            - cell "—" [ref=e461]:
+              - button "—" [ref=e462]
+            - cell "Reconcile with server/client boundary notes" [ref=e463]:
+              - button "Reconcile with server/client boundary notes" [ref=e464]
+            - cell "Delete Notes from pasting a Twitter thread on RSC boundaries" [ref=e465]:
+              - button "Delete Notes from pasting a Twitter thread on RSC boundaries" [ref=e466]: Delete
+          - row "Type-safe Event Emitters in TypeScript Edit title and URL for Type-safe Event Emitters in TypeScript DEV.to TypeScript Advanced Low To Read 18 58 — Read if time permits Delete Type-safe Event Emitters in TypeScript" [ref=e467]:
+            - cell "Type-safe Event Emitters in TypeScript Edit title and URL for Type-safe Event Emitters in TypeScript" [ref=e468]:
+              - generic [ref=e469]:
+                - link "Type-safe Event Emitters in TypeScript" [ref=e470] [cursor=pointer]:
+                  - /url: https://dev.to/some-author/type-safe-emitters-7q8r
+                - button "Edit title and URL for Type-safe Event Emitters in TypeScript" [ref=e471]:
+                  - img [ref=e472]
+            - cell "DEV.to" [ref=e474]:
+              - generic [ref=e475]: DEV.to
+            - cell "TypeScript" [ref=e476]:
+              - combobox "Topic for Type-safe Event Emitters in TypeScript" [ref=e477] [cursor=pointer]:
+                - option "React Performance"
+                - option "Frontend System Design"
+                - option "TypeScript" [selected]
+                - option "AI Coding Agents"
+                - option "Accessibility"
+                - option "Airtable-style Data Modeling"
+            - cell "Advanced" [ref=e478]:
+              - combobox "Difficulty for Type-safe Event Emitters in TypeScript" [ref=e479] [cursor=pointer]:
+                - option "Beginner"
+                - option "Intermediate"
+                - option "Advanced" [selected]
+            - cell "Low" [ref=e480]:
+              - combobox "Priority for Type-safe Event Emitters in TypeScript" [ref=e481] [cursor=pointer]:
+                - option "Low" [selected]
+                - option "Medium"
+                - option "High"
+            - cell "To Read" [ref=e482]:
+              - combobox "Status for Type-safe Event Emitters in TypeScript" [ref=e483] [cursor=pointer]:
+                - option "To Read" [selected]
+                - option "Reading"
+                - option "Summarized"
+                - option "Practiced"
+                - option "Done"
+            - cell "18" [ref=e484]:
+              - button "18" [ref=e485]
+            - cell "58" [ref=e486]:
+              - button "58" [ref=e487]
+            - cell "—" [ref=e488]:
+              - button "—" [ref=e489]
+            - cell "Read if time permits" [ref=e490]:
+              - button "Read if time permits" [ref=e491]
+            - cell "Delete Type-safe Event Emitters in TypeScript" [ref=e492]:
+              - button "Delete Type-safe Event Emitters in TypeScript" [ref=e493]: Delete
+          - 'row "Evaluating Coding Agents: A Practical Rubric Edit title and URL for Evaluating Coding Agents: A Practical Rubric Medium AI Coding Agents Intermediate Medium Practiced 25 82 Score on task completion, edit precision, and recovery from error Apply rubric to this project walkthrough Delete Evaluating Coding Agents: A Practical Rubric" [ref=e494]':
+            - 'cell "Evaluating Coding Agents: A Practical Rubric Edit title and URL for Evaluating Coding Agents: A Practical Rubric" [ref=e495]':
+              - generic [ref=e496]:
+                - 'link "Evaluating Coding Agents: A Practical Rubric" [ref=e497] [cursor=pointer]':
+                  - /url: https://medium.com/@some-author/evaluating-coding-agents-9s0t
+                - 'button "Edit title and URL for Evaluating Coding Agents: A Practical Rubric" [ref=e498]':
+                  - img [ref=e499]
+            - cell "Medium" [ref=e501]:
+              - generic [ref=e502]: Medium
+            - cell "AI Coding Agents" [ref=e503]:
+              - 'combobox "Topic for Evaluating Coding Agents: A Practical Rubric" [ref=e504] [cursor=pointer]':
+                - option "React Performance"
+                - option "Frontend System Design"
+                - option "TypeScript"
+                - option "AI Coding Agents" [selected]
+                - option "Accessibility"
+                - option "Airtable-style Data Modeling"
+            - cell "Intermediate" [ref=e505]:
+              - 'combobox "Difficulty for Evaluating Coding Agents: A Practical Rubric" [ref=e506] [cursor=pointer]':
+                - option "Beginner"
+                - option "Intermediate" [selected]
+                - option "Advanced"
+            - cell "Medium" [ref=e507]:
+              - 'combobox "Priority for Evaluating Coding Agents: A Practical Rubric" [ref=e508] [cursor=pointer]':
+                - option "Low"
+                - option "Medium" [selected]
+                - option "High"
+            - cell "Practiced" [ref=e509]:
+              - 'combobox "Status for Evaluating Coding Agents: A Practical Rubric" [ref=e510] [cursor=pointer]':
+                - option "To Read"
+                - option "Reading"
+                - option "Summarized"
+                - option "Practiced" [selected]
+                - option "Done"
+            - cell "25" [ref=e511]:
+              - button "25" [ref=e512]
+            - cell "82" [ref=e513]:
+              - button "82" [ref=e514]
+            - cell "Score on task completion, edit precision, and recovery from error" [ref=e515]:
+              - button "Score on task completion, edit precision, and recovery from error" [ref=e516]
+            - cell "Apply rubric to this project walkthrough" [ref=e517]:
+              - button "Apply rubric to this project walkthrough" [ref=e518]
+            - 'cell "Delete Evaluating Coding Agents: A Practical Rubric" [ref=e519]':
+              - 'button "Delete Evaluating Coding Agents: A Practical Rubric" [ref=e520]': Delete
+          - row "Keyboard Navigation Patterns for Data Grids Edit title and URL for Keyboard Navigation Patterns for Data Grids Hacker News Accessibility Advanced High To Read 30 78 — Read before implementing this app’s table nav Delete Keyboard Navigation Patterns for Data Grids" [ref=e521]:
+            - cell "Keyboard Navigation Patterns for Data Grids Edit title and URL for Keyboard Navigation Patterns for Data Grids" [ref=e522]:
+              - generic [ref=e523]:
+                - link "Keyboard Navigation Patterns for Data Grids" [ref=e524] [cursor=pointer]:
+                  - /url: https://news.ycombinator.com/item?id=39815678
+                - button "Edit title and URL for Keyboard Navigation Patterns for Data Grids" [ref=e525]:
+                  - img [ref=e526]
+            - cell "Hacker News" [ref=e528]:
+              - generic [ref=e529]: Hacker News
+            - cell "Accessibility" [ref=e530]:
+              - combobox "Topic for Keyboard Navigation Patterns for Data Grids" [ref=e531] [cursor=pointer]:
+                - option "React Performance"
+                - option "Frontend System Design"
+                - option "TypeScript"
+                - option "AI Coding Agents"
+                - option "Accessibility" [selected]
+                - option "Airtable-style Data Modeling"
+            - cell "Advanced" [ref=e532]:
+              - combobox "Difficulty for Keyboard Navigation Patterns for Data Grids" [ref=e533] [cursor=pointer]:
+                - option "Beginner"
+                - option "Intermediate"
+                - option "Advanced" [selected]
+            - cell "High" [ref=e534]:
+              - combobox "Priority for Keyboard Navigation Patterns for Data Grids" [ref=e535] [cursor=pointer]:
+                - option "Low"
+                - option "Medium"
+                - option "High" [selected]
+            - cell "To Read" [ref=e536]:
+              - combobox "Status for Keyboard Navigation Patterns for Data Grids" [ref=e537] [cursor=pointer]:
+                - option "To Read" [selected]
+                - option "Reading"
+                - option "Summarized"
+                - option "Practiced"
+                - option "Done"
+            - cell "30" [ref=e538]:
+              - button "30" [ref=e539]
+            - cell "78" [ref=e540]:
+              - button "78" [ref=e541]
+            - cell "—" [ref=e542]:
+              - button "—" [ref=e543]
+            - cell "Read before implementing this app’s table nav" [ref=e544]:
+              - button "Read before implementing this app’s table nav" [ref=e545]
+            - cell "Delete Keyboard Navigation Patterns for Data Grids" [ref=e546]:
+              - button "Delete Keyboard Navigation Patterns for Data Grids" [ref=e547]: Delete
+          - 'row "Rollups, Lookups, and Formula Fields: An Implementation Guide Edit title and URL for Rollups, Lookups, and Formula Fields: An Implementation Guide DEV.to Airtable-style Data Modeling Advanced Low To Read 28 60 — Read after schema design article Delete Rollups, Lookups, and Formula Fields: An Implementation Guide" [ref=e548]':
+            - 'cell "Rollups, Lookups, and Formula Fields: An Implementation Guide Edit title and URL for Rollups, Lookups, and Formula Fields: An Implementation Guide" [ref=e549]':
+              - generic [ref=e550]:
+                - 'link "Rollups, Lookups, and Formula Fields: An Implementation Guide" [ref=e551] [cursor=pointer]':
+                  - /url: https://dev.to/some-author/rollups-lookups-formulas-1u2v
+                - 'button "Edit title and URL for Rollups, Lookups, and Formula Fields: An Implementation Guide" [ref=e552]':
+                  - img [ref=e553]
+            - cell "DEV.to" [ref=e555]:
+              - generic [ref=e556]: DEV.to
+            - cell "Airtable-style Data Modeling" [ref=e557]:
+              - 'combobox "Topic for Rollups, Lookups, and Formula Fields: An Implementation Guide" [ref=e558] [cursor=pointer]':
+                - option "React Performance"
+                - option "Frontend System Design"
+                - option "TypeScript"
+                - option "AI Coding Agents"
+                - option "Accessibility"
+                - option "Airtable-style Data Modeling" [selected]
+            - cell "Advanced" [ref=e559]:
+              - 'combobox "Difficulty for Rollups, Lookups, and Formula Fields: An Implementation Guide" [ref=e560] [cursor=pointer]':
+                - option "Beginner"
+                - option "Intermediate"
+                - option "Advanced" [selected]
+            - cell "Low" [ref=e561]:
+              - 'combobox "Priority for Rollups, Lookups, and Formula Fields: An Implementation Guide" [ref=e562] [cursor=pointer]':
+                - option "Low" [selected]
+                - option "Medium"
+                - option "High"
+            - cell "To Read" [ref=e563]:
+              - 'combobox "Status for Rollups, Lookups, and Formula Fields: An Implementation Guide" [ref=e564] [cursor=pointer]':
+                - option "To Read" [selected]
+                - option "Reading"
+                - option "Summarized"
+                - option "Practiced"
+                - option "Done"
+            - cell "28" [ref=e565]:
+              - button "28" [ref=e566]
+            - cell "60" [ref=e567]:
+              - button "60" [ref=e568]
+            - cell "—" [ref=e569]:
+              - button "—" [ref=e570]
+            - cell "Read after schema design article" [ref=e571]:
+              - button "Read after schema design article" [ref=e572]
+            - 'cell "Delete Rollups, Lookups, and Formula Fields: An Implementation Guide" [ref=e573]':
+              - 'button "Delete Rollups, Lookups, and Formula Fields: An Implementation Guide" [ref=e574]': Delete
+      - button "+ Add row" [ref=e576]

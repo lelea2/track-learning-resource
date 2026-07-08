@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Bash(npm exec *)",
+      "Bash(npm install *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "mcp__playwright__browser_run_code_unsafe",
+      "mcp__playwright__browser_tabs",
+      "mcp__playwright__browser_close",
+      "Bash(pkill -f \"vite --port 5183\")",
+      "mcp__playwright__browser_resize",
+      "Bash(pkill -f \"vite --port 5184\")",
+      "Bash(pkill -f \"vite --port 5185\")",
+      "Bash(pkill -f \"vite --port 5186\")",
+      "Bash(git -C /Users/khanhdao/Works/learning-resource mv src/mocks/fixtures/suggestionSources.ts server/fixtures/suggestionSources.ts)",
+      "Bash(curl -s -X POST http://localhost:3099/api/suggestions -H 'Content-Type: application/json' -d '{\"focus\":\"typescript\"}')",
+      "Bash(curl -s -X POST http://localhost:3099/api/articles/parse -H 'Content-Type: application/json' -d '{\"rawText\":\"Notes on GraphQL federation\"}')",
+      "Bash(pkill -f \"tsx server/index.ts\")",
+      "mcp__playwright__browser_network_requests",
+      "mcp__playwright__browser_network_request",
+      "Bash(pkill -f \"vite --port 5190\")",
+      "Bash(lsof -iTCP -sTCP:LISTEN -P)"
+    ]
+  }
+}
