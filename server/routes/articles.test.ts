@@ -99,6 +99,15 @@ describe('POST /api/articles/parse', () => {
     expect(response.body.id).toBeTruthy();
   });
 
+  it('derives source from the URL host when a URL is pasted', async () => {
+    const response = await request(app)
+      .post('/api/articles/parse')
+      .send({ url: 'https://www.smashingmagazine.com/some-post' });
+
+    expect(response.status).toBe(201);
+    expect(response.body.source).toBe('smashingmagazine.com');
+  });
+
   it('surfaces upstream failures as 502', async () => {
     const { simulateUpstreamCall } = await import('../utils/simulateLatency');
     vi.mocked(simulateUpstreamCall).mockRejectedValueOnce(new Error('simulated failure'));

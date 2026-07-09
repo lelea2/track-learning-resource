@@ -12,11 +12,13 @@ articlesRouter.get('/', async (_req, res) => {
 });
 
 articlesRouter.post('/', async (req, res) => {
-  const body = req.body as Omit<LearningRow, 'id' | 'createdAt'>;
+  const body = req.body as Omit<LearningRow, 'id' | 'createdAt' | 'statusUpdatedAt'>;
+  const now = new Date().toISOString();
   const row: LearningRow = {
     ...body,
     id: generateRowId(),
-    createdAt: new Date().toISOString(),
+    createdAt: now,
+    statusUpdatedAt: now,
   };
   const created = await getRepository().create(row);
   res.status(201).json(created);
@@ -31,14 +33,24 @@ articlesRouter.post('/parse', async (req, res) => {
   }
 
   const { url, rawText } = req.body as { url?: string; rawText?: string };
-  const parsed = await getContentParser().parse({ url, rawText });
 
+  let parsed;
+  try {
+    parsed = await getContentParser().parse({ url, rawText });
+  } catch (error) {
+    res.status(502).json({
+      error: error instanceof Error ? error.message : 'Could not parse that input right now.',
+    });
+    return;
+  }
+
+  const now = new Date().toISOString();
   const row: LearningRow = {
     id: generateRowId(),
-    source: 'Manual',
     url: url ?? '',
     status: 'To Read',
-    createdAt: new Date().toISOString(),
+    createdAt: now,
+    statusUpdatedAt: now,
     ...parsed,
   };
 

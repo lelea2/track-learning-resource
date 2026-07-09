@@ -30,6 +30,16 @@ describe('POST /api/suggestions', () => {
     expect(persisted).toBe(true);
   });
 
+  it('derives each row\'s source from its own URL host, not a category label', async () => {
+    const response = await request(app).post('/api/suggestions').send({ focus: 'typescript' });
+
+    expect(response.status).toBe(201);
+    for (const row of response.body) {
+      const expectedHost = new URL(row.url).hostname.replace(/^www\./, '');
+      expect(row.source).toBe(expectedHost);
+    }
+  });
+
   it('400s for a missing focus', async () => {
     const response = await request(app).post('/api/suggestions').send({});
     expect(response.status).toBe(400);

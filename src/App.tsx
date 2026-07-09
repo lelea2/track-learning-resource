@@ -5,6 +5,7 @@ import { FetchSuggestionsPanel } from './components/FetchSuggestions/FetchSugges
 import { ManualEntryForm } from './components/ManualEntry/ManualEntryForm';
 import { StudyPlanPanel } from './components/StudyPlanPanel/StudyPlanPanel';
 import { MetricsBar } from './components/MetricsBar/MetricsBar';
+import { ProgressChart } from './components/ProgressChart/ProgressChart';
 
 function App() {
   const {
@@ -14,6 +15,8 @@ function App() {
     sort,
     studyPlan,
     metrics,
+    dailyProgress,
+    sourceOptions,
     initStatus,
     initError,
     fetchStatus,
@@ -65,6 +68,8 @@ function App() {
 
             <StudyPlanPanel studyPlan={studyPlan} />
 
+            <ProgressChart dailyProgress={dailyProgress} />
+
             <div className="grid gap-4 md:grid-cols-2">
               <FetchSuggestionsPanel
                 status={fetchStatus}
@@ -83,6 +88,7 @@ function App() {
               sort={sort}
               visibleCount={visibleRows.length}
               totalCount={rows.length}
+              sourceOptions={sourceOptions}
               onFiltersChange={setFilters}
               onSortChange={setSort}
             />

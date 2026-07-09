@@ -37,4 +37,24 @@ describe('parseArticleInput', () => {
     expect(result.interviewRelevance).toBeGreaterThanOrEqual(40);
     expect(result.interviewRelevance).toBeLessThanOrEqual(94);
   });
+
+  it('derives source from the URL host', () => {
+    const result = parseArticleInput({ url: 'https://dev.to/author/some-post' });
+    expect(result.source).toBe('dev.to');
+  });
+
+  it('strips a leading www. from the derived source', () => {
+    const result = parseArticleInput({ url: 'https://www.smashingmagazine.com/some-post' });
+    expect(result.source).toBe('smashingmagazine.com');
+  });
+
+  it('falls back to "Manual" when there is no URL', () => {
+    const result = parseArticleInput({ rawText: 'Just a note, no link' });
+    expect(result.source).toBe('Manual');
+  });
+
+  it('falls back to "Manual" for an unparseable URL', () => {
+    const result = parseArticleInput({ url: 'not a real url' });
+    expect(result.source).toBe('Manual');
+  });
 });

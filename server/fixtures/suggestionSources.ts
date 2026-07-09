@@ -1,149 +1,281 @@
-import type { ArticleSource, LearningFocus } from '../../src/types';
+import type { LearningFocus } from '../../src/types';
 
 export interface RawSuggestion {
   title: string;
   url: string;
-  source: ArticleSource;
 }
 
 /**
- * Canned per-focus "search results" standing in for Hacker News top/best
- * stories, DEV.to tag queries, and Medium RSS. Each item is intentionally
- * only a title + url + source — the rest of the row is filled in by
- * parseArticleInput, same as a real fetch would hand raw results to the
- * content parser.
+ * Per-focus "search results" for Fetch Suggestions — 10 per focus, standing
+ * in for a real Hacker News/DEV.to/Medium/newsletter-API call. Each item is
+ * intentionally only a title + url — `source` is derived from the url's
+ * site host by parseArticleInput, same as a real fetch would hand raw
+ * results to the content parser.
+ *
+ * Sourced from https://github.com/Infrasity-Labs/awesome-tech-newsletter
+ * (a community-curated newsletter directory) — every url below is a real
+ * newsletter homepage from that list, not a fabricated article link. The
+ * title is "{newsletter name} — {its own tagline}", not an invented
+ * headline, so nothing here claims a specific article exists that doesn't.
+ *
+ * That source repo has no dedicated Accessibility or Airtable/data-modeling
+ * section, so those two focuses use the closest available newsletters
+ * (design systems, human-centered engineering; databases/APIs,
+ * respectively) rather than a topic-exact match — everything else
+ * (react-performance, frontend-system-design, typescript, ai-coding-agents)
+ * pulls from that repo's matching or closely-adjacent section.
  */
 export const SUGGESTION_SOURCES: Record<LearningFocus, RawSuggestion[]> = {
   'react-performance': [
     {
-      title: 'Profiling React Renders with the DevTools Flamegraph',
-      url: 'https://dev.to/some-author/profiling-react-renders-a1b2',
-      source: 'DEV.to',
+      title: 'Reactdevelopment — Advanced React, TypeScript patterns & performance deep dives',
+      url: 'https://reactdevelopment.substack.com',
     },
     {
-      title: 'Show HN: A visual diff tool for React re-renders',
-      url: 'https://news.ycombinator.com/item?id=39820001',
-      source: 'Hacker News',
+      title: "Addyo — Addy Osmani's newsletter on elevating your effectiveness",
+      url: 'https://addyo.substack.com',
     },
     {
-      title: 'useMemo Is Not a Performance Hook',
-      url: 'https://dev.to/some-author/usememo-is-not-a-performance-hook-c3d4',
-      source: 'DEV.to',
+      title: 'Leerob — Things in tech and web development',
+      url: 'https://leerob.substack.com',
     },
     {
-      title: 'Virtualizing Large Lists Without Killing Scroll Feel',
-      url: 'https://medium.com/@some-author/virtualizing-large-lists-e5f6',
-      source: 'Medium',
+      title: 'Frontend Weekly — hand-picked front-end development articles',
+      url: 'https://medium.com/front-end-weekly',
+    },
+    {
+      title: 'Frontend and beyond — web development done right',
+      url: 'https://medium.com/frontend-and-beyond',
+    },
+    {
+      title: 'UpWeb — stay ahead in web development, latest insights every Wednesday',
+      url: 'https://webdeveloper.beehiiv.com',
+    },
+    {
+      title: 'Jsdevspace — in-depth JavaScript programming articles and tutorials',
+      url: 'https://jsdevspace.substack.com',
+    },
+    {
+      title: 'Front End Web Development Feeds and Newsletters',
+      url: 'https://leftalign.substack.com',
+    },
+    {
+      title: 'Hibiki HTML — weekly roundup of open-source software for front-end engineers',
+      url: 'https://console.substack.com',
+    },
+    {
+      title: 'Jarrod Overson — JavaScript, Rust, WebAssembly, Security',
+      url: 'https://jsoverson.medium.com',
     },
   ],
   'frontend-system-design': [
     {
-      title: 'Designing a Notification System for the Frontend',
-      url: 'https://dev.to/some-author/designing-notification-system-g7h8',
-      source: 'DEV.to',
+      title: 'High Scalability — architectures of successful, highly scalable websites',
+      url: 'https://highscalability.com/',
     },
     {
-      title: 'Ask HN: How do you structure state across microfrontends?',
-      url: 'https://news.ycombinator.com/item?id=39820123',
-      source: 'Hacker News',
+      title: 'ByteByteGo — complex systems explained in simple terms',
+      url: 'https://blog.bytebytego.com/',
     },
     {
-      title: 'Caching Strategies for Client-Rendered Dashboards',
-      url: 'https://medium.com/@some-author/caching-strategies-i9j0',
-      source: 'Medium',
+      title: 'ByteByteGo System Design Alliance — explain complex systems with simple terms',
+      url: 'https://medium.com/bytebytego-system-design-alliance',
     },
     {
-      title: 'A Practical Guide to RSC Boundaries',
-      url: 'https://dev.to/some-author/rsc-boundaries-k1l2',
-      source: 'DEV.to',
+      title: 'Musings on computer systems — testing, performance, engineering architecture',
+      url: 'https://buttondown.email/nelhage',
+    },
+    {
+      title: 'Ripples in Middleware — system design, SOA, REST, microservices, scalability',
+      url: 'https://medium.com/systems-architectures',
+    },
+    {
+      title: 'Software Architecture Is About Things Hard to Change — mental models, primitives, trade-offs',
+      url: 'https://tomasjurasek.substack.com',
+    },
+    {
+      title: 'Software Architecture and Philosophical Anthropology — on humans and agents',
+      url: 'https://michaelmangialardi.substack.com',
+    },
+    {
+      title: 'Kousik Nath — distributed systems, computing concepts, real-life systems designing',
+      url: 'https://kousiknath.medium.com',
+    },
+    {
+      title: 'Vedcraft — sharing practical knowledge, from Sanskrit "Ved" (knowledge) as "Craft"',
+      url: 'https://medium.com/vedcraft',
+    },
+    {
+      title: 'Pointer — a reading club for developers on engineering leadership and best practices',
+      url: 'https://www.pointer.io/',
     },
   ],
   typescript: [
     {
-      title: 'Branded Types for Safer IDs in TypeScript',
-      url: 'https://dev.to/some-author/branded-types-m3n4',
-      source: 'DEV.to',
+      title: 'FOSS Weekly — the easiest way to keep up with free & open-source software',
+      url: 'https://fossweekly.beehiiv.com',
     },
     {
-      title: 'Show HN: A type-safe router for React built on template literals',
-      url: 'https://news.ycombinator.com/item?id=39820456',
-      source: 'Hacker News',
+      title: 'Trusted Value — open to learning and working with any web technology',
+      url: 'https://helitharupasinghe.hashnode.dev',
     },
     {
-      title: 'Narrowing Discriminated Unions Without Type Guards',
-      url: 'https://medium.com/@some-author/narrowing-unions-o5p6',
-      source: 'Medium',
+      title: "Jacob's Tech Tavern — advanced concurrency and language performance, 10 minutes a week",
+      url: 'https://jacobbartlett.substack.com',
     },
     {
-      title: 'The TypeScript Generics Cheat Sheet I Wish I Had',
-      url: 'https://dev.to/some-author/generics-cheat-sheet-q7r8',
-      source: 'DEV.to',
+      title: 'Rust Trends — a weekly newsletter covering the Rust ecosystem and community',
+      url: 'https://rusttrends.com/',
+    },
+    {
+      title: 'Golang Weekly — a weekly newsletter about the Go programming language',
+      url: 'https://golangweekly.com/',
+    },
+    {
+      title: 'Python Weekly — hand-curated news, articles, and new releases, every week',
+      url: 'https://pythonweekly.com/',
+    },
+    {
+      title: 'Thepythoncodingstack — the articles I wish I had when I was learning to code',
+      url: 'https://thepythoncodingstack.substack.com',
+    },
+    {
+      title: 'Tom Smykowski — Staff Engineer, Product, UX, Full-Stack',
+      url: 'https://tomaszs2.medium.com',
+    },
+    {
+      title: 'PythonIQ — practical, thought-provoking, insightful articles on programming in Python',
+      url: 'https://medium.com/pythoniq',
+    },
+    {
+      title: 'Elton Minetto — Principal Software Engineer, Google Developer Expert in Go',
+      url: 'https://medium.com/@eminetto',
     },
   ],
   'ai-coding-agents': [
     {
-      title: 'How Coding Agents Decide What to Read Next',
-      url: 'https://dev.to/some-author/how-coding-agents-decide-s9t0',
-      source: 'DEV.to',
+      title: 'Agentic Coding with Discipline and Skill — production-ready agentic coding practice',
+      url: 'https://agenticcoding.substack.com',
     },
     {
-      title: 'Show HN: An open-source agent harness for terminal coding tasks',
-      url: 'https://news.ycombinator.com/item?id=39820789',
-      source: 'Hacker News',
+      title: 'Agents, harnessed — coding agent harnesses and harness engineering',
+      url: 'https://codagent.beehiiv.com',
     },
     {
-      title: 'Prompt Caching and Tool-Call Ordering, Explained',
-      url: 'https://medium.com/@some-author/prompt-caching-tool-calls-u1v2',
-      source: 'Medium',
+      title: 'HN AI Newsletter — weekly AI-curated digest of top AI stories from Hacker News',
+      url: 'https://hn-ai-newsletter.beehiiv.com',
     },
     {
-      title: 'Grading Agent Output Like a Code Reviewer',
-      url: 'https://dev.to/some-author/grading-agent-output-w3x4',
-      source: 'DEV.to',
+      title: 'Theagentstack — how modern AI agents work under the hood: control loops, memory, orchestration',
+      url: 'https://theagentstack.substack.com',
+    },
+    {
+      title: 'Software That Builds Itself — how AI agents reason, plan, remember, and act',
+      url: 'https://jdsemrau.substack.com',
+    },
+    {
+      title: 'In multi-agent systems, the skill is the abstraction level — not the agent count',
+      url: 'https://hariph.hashnode.dev',
+    },
+    {
+      title: 'I built an eval harness for my own AI, and it caught my digital twin lying',
+      url: 'https://akashpersetti.hashnode.dev',
+    },
+    {
+      title: "We let AI write the code. We just don't let it check its own work.",
+      url: 'https://lingchong.substack.com',
+    },
+    {
+      title: 'How to AI — artificial intelligence and product strategy for builders and founders',
+      url: 'https://ruben.substack.com',
+    },
+    {
+      title: 'Guide to AI — artificial intelligence, startups, and policy for tech professionals',
+      url: 'https://nathanbenaich.substack.com',
     },
   ],
   accessibility: [
     {
-      title: 'Focus Management Patterns Beyond the Obvious',
-      url: 'https://dev.to/some-author/focus-management-y5z6',
-      source: 'DEV.to',
+      title: 'Design Systems Collective — scalable, consistent design for designers and developers',
+      url: 'https://medium.com/design-systems-collective',
     },
     {
-      title: 'Ask HN: Best resources for learning ARIA in depth?',
-      url: 'https://news.ycombinator.com/item?id=39821012',
-      source: 'Hacker News',
+      title: 'The Personable Engineer — designing systems, processes, culture, and tools that are human friendly',
+      url: 'https://fernandovillalba.substack.com',
     },
     {
-      title: 'Screen Reader Testing Without a Screen Reader Habit',
-      url: 'https://medium.com/@some-author/screen-reader-testing-a7b8',
-      source: 'Medium',
+      title: 'Figma-to-code: the real shift happening',
+      url: 'https://christinevallaure.substack.com',
     },
     {
-      title: 'Keyboard-First Data Grids: Lessons from Airtable and Sheets',
-      url: 'https://dev.to/some-author/keyboard-first-data-grids-c9d0',
-      source: 'DEV.to',
+      title: 'Front-End versus Back-End — software design is an exercise in human relationships',
+      url: 'https://tidyfirst.substack.com',
+    },
+    {
+      title: "Hiding the Button Isn't Authorization: Why You Must Gate the Request",
+      url: 'https://emeka-nwosa.hashnode.dev',
+    },
+    {
+      title: 'Computer Things — Formal Methods, Software History and Culture',
+      url: 'https://buttondown.email/hillelwayne',
+    },
+    {
+      title: 'The Documentation System Every Startup Should Have',
+      url: 'https://virginiamwegahashnodedev.hashnode.dev',
+    },
+    {
+      title: 'On Coding — thoughts about writing code',
+      url: 'https://medium.com/on-coding',
+    },
+    {
+      title: 'Software Craft as Plumbing and Art',
+      url: 'https://emptyingmyhead.substack.com',
+    },
+    {
+      title: "The Metagame — an engineer's thoughts on human behavior, productivity, and living well",
+      url: 'https://themetagame.beehiiv.com',
     },
   ],
   'airtable-data-modeling': [
     {
-      title: 'Rollups vs Lookups: When to Use Which',
-      url: 'https://dev.to/some-author/rollups-vs-lookups-e1f2',
-      source: 'DEV.to',
+      title: 'DB Weekly — a weekly round-up of database technology news and articles',
+      url: 'https://dbweekly.com/',
     },
     {
-      title: 'Show HN: A schema designer for spreadsheet-style databases',
-      url: 'https://news.ycombinator.com/item?id=39821345',
-      source: 'Hacker News',
+      title: 'Data warehouse is the new back end — infrastructure and surfing',
+      url: 'https://pchase.substack.com',
     },
     {
-      title: 'Modeling Many-to-Many Without a Junction Table Headache',
-      url: 'https://medium.com/@some-author/modeling-many-to-many-g3h4',
-      source: 'Medium',
+      title: 'not_afraid — Software Engineer passionate about Backend, PostgreSQL, infra & web security',
+      url: 'https://not-afraid.medium.com',
     },
     {
-      title: 'Formula Fields Under the Hood: Dependency Graphs',
-      url: 'https://dev.to/some-author/formula-fields-dependency-graphs-i5j6',
-      source: 'DEV.to',
+      title: 'Javarevisited Newsletter — master Java and System Design interviews',
+      url: 'https://javarevisited.substack.com',
+    },
+    {
+      title: 'Levels.fyi used Google Sheets for their back end — system design and engineering fundamentals',
+      url: 'https://bytesizeddesign.substack.com',
+    },
+    {
+      title: 'API Complexity Is a Lie — curated API moves, unfiltered expert takes',
+      url: 'https://apichangelog.substack.com',
+    },
+    {
+      title: 'Albert Wong — eCommerce, Java, Database, k8s, Automation',
+      url: 'https://atwong.medium.com',
+    },
+    {
+      title: 'tajawal — tech blog',
+      url: 'https://medium.com/tech-tajawal',
+    },
+    {
+      title: 'API Developer Weekly — the business, design, development, and deployment of APIs',
+      url: 'https://apideveloperweekly.com/',
+    },
+    {
+      title: 'Engineering At Scale — simplifying databases, system design, architecture',
+      url: 'https://engineeringatscale.substack.com',
     },
   ],
 };

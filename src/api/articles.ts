@@ -5,7 +5,9 @@ export function listArticles(): Promise<LearningRow[]> {
   return apiClient.get<LearningRow[]>('/api/articles');
 }
 
-export function createArticle(row: Omit<LearningRow, 'id' | 'createdAt'>): Promise<LearningRow> {
+export function createArticle(
+  row: Omit<LearningRow, 'id' | 'createdAt' | 'statusUpdatedAt'>,
+): Promise<LearningRow> {
   return apiClient.post<LearningRow>('/api/articles', row);
 }
 

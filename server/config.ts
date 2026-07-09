@@ -2,16 +2,17 @@ import type { ArticleRepository } from './repository/ArticleRepository';
 import { InMemoryArticleRepository } from './repository/InMemoryArticleRepository';
 import type { ContentParser } from './llm/ContentParser';
 import { MockContentParser } from './llm/MockContentParser';
+import { OpenAIContentParser } from './llm/OpenAIContentParser';
 import { learningRowFixtures } from './fixtures/learningRows';
 
 /**
  * The only place env vars are read for provider selection — nothing
- * downstream branches on provider type. Both factories currently support a
- * single implementation; the `default` case documents the swap-in point
- * described in BUILD_PLAN.md rather than pretending it's already wired.
+ * downstream branches on provider type. `DB_PROVIDER=sql`'s `default` case
+ * documents the swap-in point described in BUILD_PLAN.md rather than
+ * pretending it's already wired; `LLM_PROVIDER=openai` is wired.
  *
- * Instances are memoized so every route shares the same repository — a
- * fresh instance per call would silently reset state on every request.
+ * Instances are memoized so every route shares the same repository/parser —
+ * a fresh instance per call would silently reset state on every request.
  */
 
 let repository: ArticleRepository | null = null;
@@ -45,9 +46,8 @@ export function getContentParser(): ContentParser {
       contentParser = new MockContentParser();
       return contentParser;
     case 'openai':
-      throw new Error(
-        'LLM_PROVIDER=openai is not implemented yet — swap in an OpenAIContentParser here.',
-      );
+      contentParser = new OpenAIContentParser();
+      return contentParser;
     default:
       throw new Error(`Unknown LLM_PROVIDER: ${provider}`);
   }

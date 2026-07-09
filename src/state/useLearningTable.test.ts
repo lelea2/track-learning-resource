@@ -111,6 +111,16 @@ describe('useLearningTable', () => {
     expect(result.current.visibleRows.map((r) => r.id)).toEqual(['b']);
   });
 
+  it('derives sourceOptions as the sorted unique sources present in rows', async () => {
+    const { result } = await renderLoadedTable([
+      makeRow({ id: 'a', source: 'dev.to' }),
+      makeRow({ id: 'b', source: 'medium.com' }),
+      makeRow({ id: 'c', source: 'dev.to' }),
+    ]);
+
+    expect(result.current.sourceOptions).toEqual(['dev.to', 'medium.com']);
+  });
+
   it('applies sort to visibleRows', async () => {
     const { result } = await renderLoadedTable([
       makeRow({ id: 'a', priority: 'Low' }),

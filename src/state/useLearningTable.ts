@@ -12,6 +12,8 @@ import { DEFAULT_FILTERS, filterRows, type RowFilters } from '../utils/filtering
 import { DEFAULT_SORT, sortRows, type SortState } from '../utils/sorting';
 import { generateStudyPlan } from '../utils/studyPlan';
 import { computeMetrics } from '../utils/metrics';
+import { computeDailyProgress } from '../utils/progressOverTime';
+import { MANUAL_SOURCE } from '../utils/parseArticleInput';
 
 type AsyncStatus = 'idle' | 'loading' | 'error';
 
@@ -105,10 +107,10 @@ function reducer(state: State, action: Action): State {
   }
 }
 
-function blankRowPayload(): Omit<LearningRow, 'id' | 'createdAt'> {
+function blankRowPayload(): Omit<LearningRow, 'id' | 'createdAt' | 'statusUpdatedAt'> {
   return {
     title: 'New row',
-    source: 'Manual',
+    source: MANUAL_SOURCE,
     url: '',
     topic: 'typescript',
     difficulty: 'Beginner',
@@ -161,6 +163,14 @@ export function useLearningTable() {
 
   const studyPlan = useMemo(() => generateStudyPlan(state.rows), [state.rows]);
   const metrics = useMemo(() => computeMetrics(state.rows, studyPlan), [state.rows, studyPlan]);
+  const dailyProgress = useMemo(() => computeDailyProgress(state.rows), [state.rows]);
+  // Source is derived from each row's URL host (see parseArticleInput), so
+  // it's open-ended rather than a fixed enum — the filter's options come
+  // from whatever sources are actually present in the data.
+  const sourceOptions = useMemo(
+    () => [...new Set(state.rows.map((row) => row.source))].sort((a, b) => a.localeCompare(b)),
+    [state.rows],
+  );
 
   const addBlankRow = useCallback(() => {
     createArticle(blankRowPayload())
@@ -171,8 +181,13 @@ export function useLearningTable() {
   }, []);
 
   const updateRow = useCallback((id: string, patch: Partial<LearningRow>) => {
-    dispatch({ type: 'UPDATE_ROW', id, patch });
-    updateArticle(id, patch).catch((error: unknown) => {
+    // Stamp statusUpdatedAt client-side so the optimistic update and the
+    // persisted value are identical — the progress chart reads this field.
+    const fullPatch = patch.status
+      ? { ...patch, statusUpdatedAt: new Date().toISOString() }
+      : patch;
+    dispatch({ type: 'UPDATE_ROW', id, patch: fullPatch });
+    updateArticle(id, fullPatch).catch((error: unknown) => {
       console.error('Failed to save row update:', error);
     });
   }, []);
@@ -225,6 +240,8 @@ export function useLearningTable() {
     sort: state.sort,
     studyPlan,
     metrics,
+    dailyProgress,
+    sourceOptions,
     initStatus: state.initStatus,
     initError: state.initError,
     fetchStatus: state.fetchStatus,

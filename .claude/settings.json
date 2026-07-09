@@ -21,7 +21,18 @@
       "mcp__playwright__browser_network_requests",
       "mcp__playwright__browser_network_request",
       "Bash(pkill -f \"vite --port 5190\")",
-      "Bash(lsof -iTCP -sTCP:LISTEN -P)"
+      "Bash(lsof -iTCP -sTCP:LISTEN -P)",
+      "Bash(node /private/tmp/claude-501/bundled-skills/2.1.204/838f5c3c56571e84a80eb38316926735/dataviz/scripts/validate_palette.js \"#10b981,#fbbf24\" --mode light --surface \"#ffffff\")",
+      "Bash(node /private/tmp/claude-501/bundled-skills/2.1.204/838f5c3c56571e84a80eb38316926735/dataviz/scripts/validate_palette.js \"#059669,#d97706\" --mode light --surface \"#ffffff\")",
+      "Bash(pkill -f \"vite --port 5191\")",
+      "Bash(gh api *)",
+      "Bash(curl -s https://raw.githubusercontent.com/Infrasity-Labs/awesome-tech-newsletter/main/README.md)",
+      "Read(//tmp/**)",
+      "Bash(node -e ' *)",
+      "Bash(awk '/^  [a-z'\"'\"'-]+: \\\\[|^  '\"'\"'/{f=$0} /title:/{c[f]++} END{for \\(k in c\\) print k, c[k]}' server/fixtures/suggestionSources.ts)",
+      "Bash(curl -s -X POST http://localhost:3001/api/suggestions -H 'Content-Type: application/json' -d '{\"focus\":\"ai-coding-agents\"}')",
+      "Bash(python3 -m json.tool)",
+      "Bash(pkill -f \"vite --port 5192\")"
     ]
   }
 }

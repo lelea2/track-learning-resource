@@ -15,7 +15,8 @@ export function FetchSuggestionsPanel({ status, error, onFetch }: FetchSuggestio
     <div className="rounded-lg border border-slate-200 bg-white p-3">
       <h2 className="text-sm font-semibold text-slate-700">Fetch Suggestions</h2>
       <p className="mt-0.5 text-xs text-slate-400">
-        Pull article suggestions for a learning focus from Hacker News, DEV.to, and Medium.
+        Pull article suggestions for a learning focus from Hacker News, DEV.to, Medium,
+        and curated newsletters.
       </p>
 
       <div className="mt-3 flex flex-wrap items-center gap-2">

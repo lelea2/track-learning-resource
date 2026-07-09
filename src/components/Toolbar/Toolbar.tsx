@@ -1,5 +1,4 @@
 import {
-  ARTICLE_SOURCE_OPTIONS,
   DIFFICULTY_OPTIONS,
   LEARNING_FOCUS_LABELS,
   LEARNING_FOCUS_OPTIONS,
@@ -15,6 +14,7 @@ interface ToolbarProps {
   sort: SortState;
   visibleCount: number;
   totalCount: number;
+  sourceOptions: readonly string[];
   onFiltersChange: (patch: Partial<RowFilters>) => void;
   onSortChange: (sort: SortState) => void;
 }
@@ -31,6 +31,7 @@ export function Toolbar({
   sort,
   visibleCount,
   totalCount,
+  sourceOptions,
   onFiltersChange,
   onSortChange,
 }: ToolbarProps) {
@@ -91,7 +92,7 @@ export function Toolbar({
       <FilterSelect
         label="Source"
         value={filters.source}
-        options={ARTICLE_SOURCE_OPTIONS}
+        options={sourceOptions}
         onChange={(source) => onFiltersChange({ source })}
       />
 

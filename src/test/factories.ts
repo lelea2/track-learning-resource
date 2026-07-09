@@ -15,6 +15,7 @@ export function makeRow(overrides: Partial<LearningRow> = {}): LearningRow {
     keyTakeaway: '',
     nextAction: '',
     createdAt: '2026-01-01T00:00:00.000Z',
+    statusUpdatedAt: '2026-01-01T00:00:00.000Z',
     ...overrides,
   };
 }

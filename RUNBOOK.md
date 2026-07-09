@@ -54,12 +54,12 @@ npm run test          # single run (CI mode)
 npm run test:watch    # watch mode while developing
 ```
 
-80 tests: 56 client-side (deterministic parsing/sorting/filtering/study-plan/
-metrics utils, the `useLearningTable` hook including async init + optimistic
-CRUD + mocked fetch/parse success/error paths, and Table component
-interactions) + 24 server-side (`InMemoryArticleRepository`, `MockContentParser`,
-and both route files via `supertest` — status codes, 404s, 400s, and the
-simulated-502 failure path).
+91 tests: 67 client-side (deterministic parsing/sorting/filtering/study-plan/
+metrics/progress utils, the `useLearningTable` hook including async init +
+optimistic CRUD + mocked fetch/parse success/error paths, and Table/ProgressChart
+component interactions) + 24 server-side (`InMemoryArticleRepository`,
+`MockContentParser`, and both route files via `supertest` — status codes,
+404s, 400s, and the simulated-502 failure path).
 
 ## Typecheck, lint, build
 
@@ -80,20 +80,29 @@ commands above should run clean on a fresh checkout.
    today's study minutes. Recomputed live from table state.
 2. **Today's Study Plan** — auto-picks 1 high-priority row, 1 practical
    coding row, 1 leadership/system-design row. Updates as rows change.
-3. **Fetch Suggestions** — pick a learning focus, click the button. The
-   server simulates a ~0.5-0.9s upstream call and returns 4 parsed rows for
-   that focus, already persisted server-side. Fails ~12% of the time on
-   purpose (shows the error banner + Retry button) — deliberate, not a real
-   bug; click Retry or Fetch again.
-4. **Paste a Link or Note** — paste a URL or free text, click "Add to table".
+3. **Study Progress — Last 14 Days** — a stacked column chart of daily
+   Completed (emerald) vs. Progressed (amber) counts, based on each row's
+   `statusUpdatedAt`. Hover or focus a bar for exact counts; change any
+   row's Status and watch *today's* bar update live, no reload needed (it's
+   also persisted — refresh and it's still there). Empty state shown if
+   nothing's changed status in the window.
+4. **Fetch Suggestions** — pick a learning focus, click the button. The
+   server simulates a ~0.5-0.9s upstream call and returns 10 parsed rows for
+   that focus, already persisted server-side. The canned per-focus data is
+   real newsletters pulled from the
+   [awesome-tech-newsletter](https://github.com/Infrasity-Labs/awesome-tech-newsletter)
+   directory (real names, real links — see `server/fixtures/suggestionSources.ts`),
+   not a live API call. Fails ~12% of the time on purpose (shows the error
+   banner + Retry button) — deliberate, not a real bug; click Retry or Fetch again.
+5. **Paste a Link or Note** — paste a URL or free text, click "Add to table".
    Hits `POST /api/articles/parse`, which runs the same deterministic mock
    parser (`src/utils/parseArticleInput.ts`, wrapped server-side by
    `MockContentParser`) that backs Fetch Suggestions, then persists the row.
-5. **Toolbar** — live search by title, filter by status/topic/difficulty/
+6. **Toolbar** — live search by title, filter by status/topic/difficulty/
    priority/source, sort by priority/topic/estimated time (click the
    direction toggle to flip asc/desc). All client-side over whatever rows
    are currently loaded — no server round-trip per filter/sort change.
-6. **Table** — click any text/number cell to edit inline (Enter commits,
+7. **Table** — click any text/number cell to edit inline (Enter commits,
    Escape cancels, blur commits); selects (Topic/Difficulty/Priority/Status)
    commit on change. Title and URL are one sticky column (stays pinned
    during horizontal scroll): title renders as a clickable link (opens in a
@@ -109,13 +118,14 @@ commands above should run clean on a fresh checkout.
 src/
   types/        data model (LearningRow, StudyPlan, etc.)
   utils/        pure functions: filtering, sorting, topic inference,
-                priority scoring, mock content parser, study plan, metrics
+                priority scoring, mock content parser, study plan, metrics,
+                progress-over-time bucketing
                 (shared with server/ via relative import — see BUILD_PLAN.md)
   api/          client.ts (fetch wrapper) + articles.ts / suggestions.ts —
                 real HTTP calls to the Express server over /api/*
   state/        useLearningTable — fetches on mount, owns all table state
   components/   Table, Toolbar, FetchSuggestions, ManualEntry,
-                StudyPlanPanel, MetricsBar
+                StudyPlanPanel, ProgressChart, MetricsBar
 
 server/
   index.ts       createApp() + listen()
@@ -139,9 +149,12 @@ explicitly out of scope (offline daily RSS ingestion).
 - **Fetch Suggestions occasionally errors.** Intentional — simulates real
   network flakiness so the loading/error UI is exercised, not decorative.
   ~12% failure rate, defined in `server/utils/simulateLatency.ts` (`ERROR_RATE`).
-- **"Fetch Suggestions" returns the same canned articles every time for a
-  given focus.** Intentional for this pass — see BUILD_PLAN.md Phase 2, item
-  3 ("real external API calls" is explicitly deferred, not forgotten).
+- **"Fetch Suggestions" returns the same 10 newsletters every time for a
+  given focus.** Intentional for this pass — the data is real (genuine
+  newsletters with real links, from
+  [awesome-tech-newsletter](https://github.com/Infrasity-Labs/awesome-tech-newsletter))
+  but statically bundled, not a live API call. See BUILD_PLAN.md Phase 2,
+  item 3, and "Real newsletter suggestion data."
 - **State resets if the server process restarts.** The repository is an
   in-memory `Map` — expected until a real DB backs it (BUILD_PLAN.md's
   `SqlArticleRepository` swap point). Restarting only the client (Vite) does

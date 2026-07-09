@@ -9,6 +9,7 @@ export interface ContentParserInput {
 
 export interface ContentParserResult {
   title: string;
+  source: string;
   topic: LearningFocus;
   difficulty: Difficulty;
   priority: Priority;

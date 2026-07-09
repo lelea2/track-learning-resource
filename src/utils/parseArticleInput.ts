@@ -3,6 +3,10 @@ import { DIFFICULTY_OPTIONS } from '../types';
 import { hashString } from './hash';
 import { inferTopic } from './topicInference';
 import { scorePriority } from './priorityScoring';
+import { getSiteHost } from './siteHost';
+
+/** Fallback source label when there's no URL to derive a host from (a raw-text note). */
+export const MANUAL_SOURCE = 'Manual';
 
 export interface ParsedArticleInput {
   title?: string;
@@ -14,6 +18,7 @@ export interface ParsedArticleInput {
 
 export interface ParsedArticleFields {
   title: string;
+  source: string;
   topic: LearningFocus;
   difficulty: Difficulty;
   priority: ReturnType<typeof scorePriority>;
@@ -31,6 +36,7 @@ export interface ParsedArticleFields {
  */
 export function parseArticleInput(input: ParsedArticleInput): ParsedArticleFields {
   const title = deriveTitle(input);
+  const source = getSiteHost(input.url) ?? MANUAL_SOURCE;
   const corpus = `${title} ${input.rawText ?? ''} ${input.url ?? ''}`;
   const topic = input.topicOverride ?? inferTopic(corpus);
 
@@ -42,6 +48,7 @@ export function parseArticleInput(input: ParsedArticleInput): ParsedArticleField
 
   return {
     title,
+    source,
     topic,
     difficulty,
     priority,

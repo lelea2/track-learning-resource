@@ -17,7 +17,14 @@ export type Difficulty = 'Beginner' | 'Intermediate' | 'Advanced';
 
 export type Priority = 'Low' | 'Medium' | 'High';
 
-export type ArticleSource = 'Hacker News' | 'DEV.to' | 'Medium' | 'Manual';
+/**
+ * The site an article came from — derived from the article's URL host
+ * (e.g. "dev.to", "reactdevelopment.substack.com") wherever a URL exists,
+ * so this is open-ended rather than a fixed enum. "Manual" is the only
+ * non-hostname value, used when a row has no URL to derive one from (a
+ * raw-text note, or a blank row added via "+ Add row").
+ */
+export type ArticleSource = string;
 
 export interface ArticleItem {
   id: string;
@@ -36,6 +43,7 @@ export interface LearningRow extends ArticleItem {
   keyTakeaway: string;
   nextAction: string;
   createdAt: string; // ISO timestamp
+  statusUpdatedAt: string; // ISO timestamp — equals createdAt until status changes at least once
 }
 
 export interface StudyPlan {
@@ -69,13 +77,6 @@ export const DIFFICULTY_OPTIONS: readonly Difficulty[] = [
 ];
 
 export const PRIORITY_OPTIONS: readonly Priority[] = ['Low', 'Medium', 'High'];
-
-export const ARTICLE_SOURCE_OPTIONS: readonly ArticleSource[] = [
-  'Hacker News',
-  'DEV.to',
-  'Medium',
-  'Manual',
-];
 
 export const LEARNING_FOCUS_LABELS: Record<LearningFocus, string> = {
   'react-performance': 'React Performance',

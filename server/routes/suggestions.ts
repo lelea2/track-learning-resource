@@ -37,10 +37,10 @@ suggestionsRouter.post('/', async (req, res) => {
     });
     const row: LearningRow = {
       id: generateRowId(),
-      source: item.source,
       url: item.url,
       status: 'To Read',
       createdAt: now,
+      statusUpdatedAt: now,
       ...parsed,
     };
     created.push(await repository.create(row));
