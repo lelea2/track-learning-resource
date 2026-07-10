@@ -22,9 +22,9 @@ describe('inferTopic', () => {
     );
   });
 
-  it('detects airtable data modeling content', () => {
+  it('detects backend system design content', () => {
     expect(inferTopic('Rollups vs Lookups in an Airtable-style schema design')).toBe(
-      'airtable-data-modeling',
+      'backend-system-design',
     );
   });
 

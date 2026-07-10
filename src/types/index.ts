@@ -4,7 +4,8 @@ export type LearningFocus =
   | 'typescript'
   | 'ai-coding-agents'
   | 'accessibility'
-  | 'airtable-data-modeling';
+  | 'backend-system-design'
+  | 'others';
 
 export type StudyStatus =
   | 'To Read'
@@ -59,7 +60,8 @@ export const LEARNING_FOCUS_OPTIONS: readonly LearningFocus[] = [
   'typescript',
   'ai-coding-agents',
   'accessibility',
-  'airtable-data-modeling',
+  'backend-system-design',
+  'others',
 ];
 
 export const STUDY_STATUS_OPTIONS: readonly StudyStatus[] = [
@@ -84,5 +86,6 @@ export const LEARNING_FOCUS_LABELS: Record<LearningFocus, string> = {
   typescript: 'TypeScript',
   'ai-coding-agents': 'AI Coding Agents',
   accessibility: 'Accessibility',
-  'airtable-data-modeling': 'Airtable-style Data Modeling',
+  'backend-system-design': 'Backend System Design',
+  others: 'Others',
 };

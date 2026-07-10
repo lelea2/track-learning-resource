@@ -18,9 +18,10 @@ export interface RawSuggestion {
  * title is "{newsletter name} — {its own tagline}", not an invented
  * headline, so nothing here claims a specific article exists that doesn't.
  *
- * That source repo has no dedicated Accessibility or Airtable/data-modeling
- * section, so those two focuses use the closest available newsletters
- * (design systems, human-centered engineering; databases/APIs,
+ * That source repo has no dedicated Accessibility, Backend/System-Design, or
+ * catch-all "Others" section, so those three focuses use the closest
+ * available newsletters (design systems/human-centered engineering;
+ * databases/APIs/distributed systems; general-interest engineering,
  * respectively) rather than a topic-exact match — everything else
  * (react-performance, frontend-system-design, typescript, ai-coding-agents)
  * pulls from that repo's matching or closely-adjacent section.
@@ -236,7 +237,7 @@ export const SUGGESTION_SOURCES: Record<LearningFocus, RawSuggestion[]> = {
       url: 'https://themetagame.beehiiv.com',
     },
   ],
-  'airtable-data-modeling': [
+  'backend-system-design': [
     {
       title: 'DB Weekly — a weekly round-up of database technology news and articles',
       url: 'https://dbweekly.com/',
@@ -276,6 +277,48 @@ export const SUGGESTION_SOURCES: Record<LearningFocus, RawSuggestion[]> = {
     {
       title: 'Engineering At Scale — simplifying databases, system design, architecture',
       url: 'https://engineeringatscale.substack.com',
+    },
+  ],
+  others: [
+    {
+      title: 'The Pragmatic Engineer — big tech and startups, from the inside',
+      url: 'https://newsletter.pragmaticengineer.com',
+    },
+    {
+      title: 'TLDR — a daily newsletter with links and TLDRs of the best tech, science, and coding news',
+      url: 'https://tldr.tech',
+    },
+    {
+      title: 'Changelog News — a healthy dose of tech news, with a focus on open source',
+      url: 'https://changelog.com/news',
+    },
+    {
+      title: 'Bytes — a JavaScript newsletter that doesn’t suck',
+      url: 'https://bytes.dev',
+    },
+    {
+      title: 'Software Lead Weekly — for busy engineering leaders who want to build phenomenal teams',
+      url: 'https://softwareleadweekly.com',
+    },
+    {
+      title: 'Hacker Newsletter — a weekly newsletter of the best articles from Hacker News',
+      url: 'https://hackernewsletter.com',
+    },
+    {
+      title: 'Devopsish — news and analysis roughly weekly, mostly about DevOps and platform engineering',
+      url: 'https://devopsish.com',
+    },
+    {
+      title: 'Console — the best tools for developers, in your inbox every week',
+      url: 'https://console.dev',
+    },
+    {
+      title: 'The Overflow — Stack Overflow’s blog on software and technology culture',
+      url: 'https://stackoverflow.blog',
+    },
+    {
+      title: "Cassidy Williams' Newsletter — musings on tech, careers, and developer culture",
+      url: 'https://cassidoo.co',
     },
   ],
 };

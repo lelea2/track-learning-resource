@@ -41,7 +41,15 @@ const TOPIC_KEYWORDS: Record<LearningFocus, string[]> = {
     'contrast',
     'keyboard nav',
   ],
-  'airtable-data-modeling': [
+  'backend-system-design': [
+    'backend',
+    'back-end',
+    'server-side',
+    'database',
+    'sql',
+    'microservice',
+    'distributed system',
+    'api design',
     'airtable',
     'rollup',
     'lookup field',
@@ -49,6 +57,7 @@ const TOPIC_KEYWORDS: Record<LearningFocus, string[]> = {
     'database model',
     'schema design',
   ],
+  others: ['miscellaneous', 'uncategorized', 'general note'],
 };
 
 const TOPIC_ORDER: LearningFocus[] = [
@@ -57,7 +66,8 @@ const TOPIC_ORDER: LearningFocus[] = [
   'typescript',
   'ai-coding-agents',
   'accessibility',
-  'airtable-data-modeling',
+  'backend-system-design',
+  'others',
 ];
 
 /**

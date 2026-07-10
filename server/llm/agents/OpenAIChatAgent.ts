@@ -23,6 +23,11 @@ export class OpenAIChatAgent implements ChatAgent {
   }
 
   async complete(messages: ChatAgentMessage[]): Promise<string> {
+    const startedAt = Date.now();
+    console.log(
+      `[OpenAIChatAgent] calling ${this.model} with ${messages.length} messages (${messages.reduce((n, m) => n + m.content.length, 0)} chars)`,
+    );
+
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
@@ -37,6 +42,8 @@ export class OpenAIChatAgent implements ChatAgent {
       }),
     });
 
+    console.log(`[OpenAIChatAgent] response status ${response.status} after ${Date.now() - startedAt}ms`);
+
     if (!response.ok) {
       const body = await response.text();
       throw new Error(`OpenAI request failed (${response.status}): ${body.slice(0, 300)}`);
@@ -44,7 +51,10 @@ export class OpenAIChatAgent implements ChatAgent {
 
     const data = (await response.json()) as {
       choices?: { message?: { content?: string } }[];
+      usage?: { prompt_tokens?: number; completion_tokens?: number };
     };
+    console.log('[OpenAIChatAgent] usage:', data.usage);
+
     const content = data.choices?.[0]?.message?.content;
     if (!content) {
       throw new Error('OpenAI response had no content.');

@@ -8,7 +8,7 @@ const PRACTICAL_CODING_TOPICS: LearningFocus[] = [
 
 const LEADERSHIP_SYSTEM_DESIGN_TOPICS: LearningFocus[] = [
   'frontend-system-design',
-  'airtable-data-modeling',
+  'backend-system-design',
 ];
 
 const PRIORITY_RANK = { High: 3, Medium: 2, Low: 1 } as const;
