@@ -25,10 +25,11 @@ articlesRouter.post('/', async (req, res) => {
 });
 
 articlesRouter.post('/parse', async (req, res) => {
-  const { url, rawText } = req.body as { url?: string; rawText?: string };
+  const { url, rawText, title } = req.body as { url?: string; rawText?: string; title?: string };
   console.log('[POST /api/articles/parse] request received', {
     url,
     rawTextLength: rawText?.length ?? 0,
+    title,
   });
 
   try {
@@ -41,7 +42,7 @@ articlesRouter.post('/parse', async (req, res) => {
 
   let parsed;
   try {
-    parsed = await getContentParser().parse({ url, rawText });
+    parsed = await getContentParser().parse({ url, rawText, title });
   } catch (error) {
     console.error('[POST /api/articles/parse] getContentParser().parse() failed:', error);
     res.status(502).json({

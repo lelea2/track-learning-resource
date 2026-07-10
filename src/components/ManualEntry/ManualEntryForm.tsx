@@ -3,7 +3,7 @@ import { useState, type FormEvent } from 'react';
 interface ManualEntryFormProps {
   status: 'idle' | 'loading' | 'error';
   error: string | null;
-  onSubmit: (input: { url?: string; rawText?: string }) => void;
+  onSubmit: (input: { url?: string; rawText?: string; title?: string }) => void;
 }
 
 type EntryMode = 'url' | 'note';
@@ -19,11 +19,13 @@ function isValidUrl(value: string): boolean {
 
 export function ManualEntryForm({ status, error, onSubmit }: ManualEntryFormProps) {
   const [mode, setMode] = useState<EntryMode>('url');
+  const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [validationError, setValidationError] = useState<string | null>(null);
 
   function switchMode(next: EntryMode) {
     setMode(next);
+    setTitle('');
     setText('');
     setValidationError(null);
   }
@@ -33,16 +35,19 @@ export function ManualEntryForm({ status, error, onSubmit }: ManualEntryFormProp
     const trimmed = text.trim();
     if (!trimmed) return;
 
+    const titleOverride = title.trim() || undefined;
+
     if (mode === 'url') {
       if (!isValidUrl(trimmed)) {
         setValidationError('Enter a valid URL, e.g. https://example.com/article');
         return;
       }
-      onSubmit({ url: trimmed });
+      onSubmit({ url: trimmed, title: titleOverride });
     } else {
-      onSubmit({ rawText: trimmed });
+      onSubmit({ rawText: trimmed, title: titleOverride });
     }
     setValidationError(null);
+    setTitle('');
     setText('');
   }
 
@@ -77,6 +82,16 @@ export function ManualEntryForm({ status, error, onSubmit }: ManualEntryFormProp
       </div>
 
       <form onSubmit={handleSubmit} className="mt-3 flex flex-col gap-2">
+        <input
+          type="text"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+          disabled={status === 'loading'}
+          placeholder={
+            mode === 'note' ? 'Document title (optional) — attached to the note' : 'Title (optional)'
+          }
+          className="w-full rounded border border-slate-200 px-2 py-1.5 text-sm outline-none focus:border-indigo-400"
+        />
         {mode === 'url' ? (
           <input
             type="url"

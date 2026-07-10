@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 interface NoteSlideOverProps {
   isOpen: boolean;
@@ -12,6 +13,13 @@ interface NoteSlideOverProps {
  * the original pasted text so it isn't otherwise inaccessible once a row is
  * created. Kept always-mounted with opacity/translate toggling (instead of
  * mount-on-open) so the slide-in transition actually animates.
+ *
+ * Rendered via a portal into document.body rather than in place — the table
+ * cell it's triggered from sits inside a `sticky`-positioned `<td>` inside
+ * an `overflow-x-auto` container, and that combination traps `position:
+ * fixed` descendants into the cell's own box instead of the viewport (the
+ * backdrop only covered part of the table, not the whole page). Portaling
+ * out to body sidesteps that entirely.
  */
 export function NoteSlideOver({ isOpen, title, content, onClose }: NoteSlideOverProps) {
   useEffect(() => {
@@ -23,14 +31,25 @@ export function NoteSlideOver({ isOpen, title, content, onClose }: NoteSlideOver
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  return (
+  // Lock page scroll while open so the table behind the panel is fully
+  // inert (not just unclickable behind the backdrop, but un-scrollable too).
+  useEffect(() => {
+    if (!isOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isOpen]);
+
+  return createPortal(
     <div
       aria-hidden={!isOpen}
-      className={`fixed inset-0 z-50 transition-opacity duration-200 ${
+      className={`fixed inset-0 z-100 transition-opacity duration-200 ${
         isOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
       }`}
     >
-      <div className="absolute inset-0 bg-slate-900/30" onClick={onClose} />
+      <div className="absolute inset-0 bg-slate-900/40" onClick={onClose} />
       <div
         role="dialog"
         aria-modal="true"
@@ -65,6 +84,7 @@ export function NoteSlideOver({ isOpen, title, content, onClose }: NoteSlideOver
           </>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

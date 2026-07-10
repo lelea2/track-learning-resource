@@ -1,0 +1,164 @@
+# AI Learning Radar Demo Script (10-15 Minutes)
+
+## 0:00-0:45 | Opening
+Hi everyone, thanks for joining.
+
+Today I want to walk through AI Learning Radar, and more importantly, why I chose to build this feature set the way I did.
+
+This is an Airtable-style learning tracker for technical articles. It helps a learner collect resources, prioritize them, turn them into a study plan, and track progress over time.
+
+My goal was not just to build a table app. My goal was to reduce the cognitive overhead of learning from too many scattered resources.
+
+## 0:45-2:00 | Why I Built It (Problem Framing)
+The core problem I observed is this:
+
+1. Engineers save a lot of articles.
+2. They rarely revisit them in a structured way.
+3. When they do revisit, they do not know what to study first.
+
+So this feature addresses three friction points:
+
+1. Intake friction: adding resources should be fast.
+2. Prioritization friction: deciding what matters should be assisted.
+3. Follow-through friction: progress should be visible and motivating.
+
+I designed this around one principle: turn passive bookmarking into active learning workflow.
+
+## 2:00-3:30 | Product Intent and User Value
+From the user perspective, this should feel like a lightweight operating system for learning.
+
+They can:
+
+1. Add and edit learning items in a familiar table.
+2. Fetch suggestions when they need discovery.
+3. Paste notes or links and get structured parsing support.
+4. Filter and sort by focus, difficulty, status, and source.
+5. Auto-generate a study plan.
+6. See progress trends, not just a static backlog.
+
+The value proposition is simple: less time organizing, more time actually learning.
+
+## 3:30-5:30 | Engineering Strategy (Staff-Level Narrative)
+From an engineering point of view, I intentionally optimized for evolvability.
+
+I introduced clean seam points so we can switch providers without rewriting business flows:
+
+1. Data repository abstraction
+2. Content parser abstraction
+
+That gives us immediate benefits:
+
+1. We can run fully in-memory for deterministic local development.
+2. We can add SQL persistence later with minimal routing impact.
+3. We can run with a deterministic mock parser today and swap in real LLM parsing when needed.
+
+This was a deliberate architectural choice: stable interfaces first, provider choices second.
+
+I also centralized state ownership in one hook so all derived behavior stays consistent:
+
+1. Filtering and sorting
+2. Study-plan generation
+3. Metrics
+4. Progress timeline
+
+That reduces drift between components and avoids duplicated logic.
+
+## 5:30-7:00 | Key Product and UX Decisions
+I made one intentionally asymmetric UX decision:
+
+1. Standard CRUD is optimistic for speed.
+2. Suggestion fetching and parsing use explicit loading and error states.
+
+Why?
+Because parsing and suggestion endpoints simulate external dependency behavior, including latency and occasional failure.
+
+I wanted to demonstrate realistic reliability handling where users actually feel uncertainty, while keeping core editing operations snappy and resilient.
+
+So users get:
+
+1. Instant feedback for routine edits.
+2. Honest feedback for async operations that can fail.
+
+That creates trust in the system behavior.
+
+## 7:00-10:30 | Live Demo Talk Track
+Now I will quickly demo the end-to-end workflow.
+
+### Step 1: Show initial table view
+Here is the current learning backlog. I can quickly scan title, source, focus, difficulty, priority, and status.
+
+### Step 2: Add a new article manually
+I add a resource title and URL.
+Notice source attribution is derived automatically from the URL host, so source data is normalized without extra user effort.
+
+### Step 3: Parse pasted content
+Now I paste a short article summary into manual parsing.
+The parser returns structured fields like likely focus area, suggested difficulty, and priority.
+This reduces manual tagging effort and keeps triage consistent.
+
+### Step 4: Fetch suggestions
+Now I fetch recommended items.
+You will see loading behavior, and if needed, graceful failure messaging.
+This simulates real-world external dependency conditions and validates the UX path.
+
+### Step 5: Filter and sort
+Now I filter by a focus area, then sort by priority and difficulty.
+The list shifts from everything I saved to what I should learn next.
+
+### Step 6: Generate study plan
+I generate a study plan from visible items.
+This transforms a static backlog into an actionable sequence.
+
+### Step 7: Update status and show metrics/progress
+I mark one or two items as in progress or done.
+You can see aggregate metrics and timeline movement update immediately, reinforcing progress momentum.
+
+That is the full loop: discover, structure, prioritize, execute, and measure.
+
+## 10:30-12:00 | Tradeoffs and What I Deferred
+I want to call out tradeoffs explicitly.
+
+What I optimized for now:
+
+1. Deterministic local reliability
+2. Clear architecture seams
+3. Fast product iteration
+
+What I deferred intentionally:
+
+1. Production persistence implementation
+2. Full external model hardening and observability
+3. Advanced recommendation ranking logic
+
+These are not gaps by accident. They are staged decisions to reduce risk and maintain delivery velocity.
+
+## 12:00-13:30 | Success Criteria and Impact
+How I measure success for this feature:
+
+1. Time-to-first-organized-study-plan
+2. Percentage of items moving from backlog to done
+3. User retention in weekly learning sessions
+4. Reduction in manual metadata entry time
+
+If we see those move in the right direction, we are not just shipping UI.
+We are improving learning throughput.
+
+## 13:30-15:00 | Close
+To summarize:
+
+I built AI Learning Radar to solve learning execution, not just learning storage.
+The architecture is intentionally modular so we can evolve parser and data providers without major rewrites.
+The UX balances speed with realistic reliability signals.
+And the end result is a workflow that helps engineers convert saved links into completed learning outcomes.
+
+Thank you. Happy to go deeper on architecture, tradeoffs, or next-phase rollout.
+
+## Optional 60-Second Q&A Add-ons
+### Why not ship SQL first?
+I prioritized interface stability and feature validation first. In-memory plus clean repository boundaries lets us move quickly now and swap storage with lower risk later.
+
+### Why include simulated failures?
+Because dependency failures are normal in production. Designing those UX paths early prevents brittle happy-path-only experiences.
+
+### What is next?
+Persisted storage, parser quality telemetry, and recommendation ranking based on user interaction signals.

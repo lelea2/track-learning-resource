@@ -22,6 +22,7 @@ export function deleteArticle(id: string): Promise<void> {
 export function parseManualEntry(input: {
   url?: string;
   rawText?: string;
+  title?: string;
 }): Promise<LearningRow> {
   return apiClient.post<LearningRow>('/api/articles/parse', input);
 }

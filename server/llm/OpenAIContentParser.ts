@@ -154,7 +154,7 @@ export class OpenAIContentParser implements ContentParser {
     );
 
     const result: ContentParserResult = {
-      title: parsed.title?.trim() || input.title || source,
+      title: input.title?.trim() || parsed.title?.trim() || source,
       source,
       topic: input.topicOverride ?? normalizeTopic(parsed.topic),
       difficulty: normalizeDifficulty(parsed.difficulty),

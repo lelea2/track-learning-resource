@@ -234,28 +234,35 @@ export function useLearningTable() {
     }
   }, []);
 
-  const submitManualEntry = useCallback(async (input: { url?: string; rawText?: string }) => {
-    dispatch({ type: 'PARSE_START' });
-    try {
-      const row = await parseManualEntry(input);
-      dispatch({ type: 'PARSE_SUCCESS', row });
-      dispatch({
-        type: 'TOAST_ADD',
-        toast: {
-          id: crypto.randomUUID(),
-          type: 'success',
-          message: `Added "${row.title}" to your table.`,
-        },
-      });
-    } catch (error) {
-      const message = error instanceof Error ? error.message : 'Something went wrong.';
-      dispatch({ type: 'PARSE_ERROR', message });
-      dispatch({
-        type: 'TOAST_ADD',
-        toast: { id: crypto.randomUUID(), type: 'error', message: `Couldn't parse that: ${message}` },
-      });
-    }
-  }, []);
+  const submitManualEntry = useCallback(
+    async (input: { url?: string; rawText?: string; title?: string }) => {
+      dispatch({ type: 'PARSE_START' });
+      try {
+        const row = await parseManualEntry(input);
+        dispatch({ type: 'PARSE_SUCCESS', row });
+        dispatch({
+          type: 'TOAST_ADD',
+          toast: {
+            id: crypto.randomUUID(),
+            type: 'success',
+            message: `Added "${row.title}" to your table.`,
+          },
+        });
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Something went wrong.';
+        dispatch({ type: 'PARSE_ERROR', message });
+        dispatch({
+          type: 'TOAST_ADD',
+          toast: {
+            id: crypto.randomUUID(),
+            type: 'error',
+            message: `Couldn't parse that: ${message}`,
+          },
+        });
+      }
+    },
+    [],
+  );
 
   const dismissToast = useCallback((id: string) => {
     dispatch({ type: 'TOAST_DISMISS', id });
