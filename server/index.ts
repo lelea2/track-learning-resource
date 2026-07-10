@@ -18,6 +18,13 @@ export function createApp() {
 
 if (process.env.NODE_ENV !== 'test') {
   const port = process.env.SERVER_PORT ? Number(process.env.SERVER_PORT) : 3001;
+  console.log('[index] environment:', {
+    SERVER_PORT: process.env.SERVER_PORT ?? '(default 3001)',
+    DB_PROVIDER: process.env.DB_PROVIDER ?? '(default memory)',
+    LLM_PROVIDER: process.env.LLM_PROVIDER ?? '(default mock)',
+    OPENAI_MODEL: process.env.OPENAI_MODEL ?? '(default gpt-4o-mini)',
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY ? 'set' : 'not set',
+  });
   createApp().listen(port, () => {
     console.log(`AI Learning Radar API listening on http://localhost:${port}`);
   });

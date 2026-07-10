@@ -88,16 +88,36 @@ describe('Table', () => {
     expect(onUpdate).toHaveBeenCalledWith('a', { status: 'Done' });
   });
 
-  it('calls onDelete when the delete button is clicked', async () => {
+  it('calls onDelete when the delete button is clicked and confirmed', async () => {
     const user = userEvent.setup();
     const onDelete = vi.fn();
+    const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(true);
     const row = makeRow({ id: 'a', title: 'Removable row' });
     render(
       <Table rows={[row]} totalRowCount={1} onUpdate={vi.fn()} onDelete={onDelete} onAddRow={vi.fn()} />,
     );
 
     await user.click(screen.getByRole('button', { name: /delete removable row/i }));
+    expect(confirmSpy).toHaveBeenCalled();
     expect(onDelete).toHaveBeenCalledWith('a');
+
+    confirmSpy.mockRestore();
+  });
+
+  it('does not call onDelete when the delete confirmation is dismissed', async () => {
+    const user = userEvent.setup();
+    const onDelete = vi.fn();
+    const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(false);
+    const row = makeRow({ id: 'a', title: 'Removable row' });
+    render(
+      <Table rows={[row]} totalRowCount={1} onUpdate={vi.fn()} onDelete={onDelete} onAddRow={vi.fn()} />,
+    );
+
+    await user.click(screen.getByRole('button', { name: /delete removable row/i }));
+    expect(confirmSpy).toHaveBeenCalled();
+    expect(onDelete).not.toHaveBeenCalled();
+
+    confirmSpy.mockRestore();
   });
 
   it('calls onAddRow when "+ Add row" is clicked', async () => {

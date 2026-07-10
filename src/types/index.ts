@@ -45,6 +45,8 @@ export interface LearningRow extends ArticleItem {
   nextAction: string;
   createdAt: string; // ISO timestamp
   statusUpdatedAt: string; // ISO timestamp — equals createdAt until status changes at least once
+  /** The original pasted text, set only for rows added via a note (no URL). */
+  noteContent?: string;
 }
 
 export interface StudyPlan {

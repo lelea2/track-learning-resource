@@ -37,15 +37,23 @@ export function getRepository(): ArticleRepository {
 }
 
 export function getContentParser(): ContentParser {
-  if (contentParser) return contentParser;
+  if (contentParser) {
+    console.log(`[config] getContentParser() reusing memoized ${contentParser.constructor.name}`);
+    return contentParser;
+  }
 
   const provider = process.env.LLM_PROVIDER ?? 'mock';
+  console.log(`[config] getContentParser() selecting provider from LLM_PROVIDER="${provider}"`);
 
   switch (provider) {
     case 'mock':
+      console.log('[config] using MockContentParser (deterministic, no network calls)');
       contentParser = new MockContentParser();
       return contentParser;
     case 'openai':
+      console.log(
+        `[config] using OpenAIContentParser (model=${process.env.OPENAI_MODEL ?? 'gpt-4o-mini'}, apiKeySet=${Boolean(process.env.OPENAI_API_KEY)})`,
+      );
       contentParser = new OpenAIContentParser();
       return contentParser;
     default:

@@ -17,6 +17,12 @@ import { MANUAL_SOURCE } from '../utils/parseArticleInput';
 
 type AsyncStatus = 'idle' | 'loading' | 'error';
 
+export interface ToastMessage {
+  id: string;
+  type: 'success' | 'error';
+  message: string;
+}
+
 interface State {
   rows: LearningRow[];
   filters: RowFilters;
@@ -27,6 +33,7 @@ interface State {
   fetchError: string | null;
   parseStatus: AsyncStatus;
   parseError: string | null;
+  toasts: ToastMessage[];
 }
 
 type Action =
@@ -43,7 +50,9 @@ type Action =
   | { type: 'FETCH_ERROR'; message: string }
   | { type: 'PARSE_START' }
   | { type: 'PARSE_SUCCESS'; row: LearningRow }
-  | { type: 'PARSE_ERROR'; message: string };
+  | { type: 'PARSE_ERROR'; message: string }
+  | { type: 'TOAST_ADD'; toast: ToastMessage }
+  | { type: 'TOAST_DISMISS'; id: string };
 
 const initialState: State = {
   rows: [],
@@ -55,6 +64,7 @@ const initialState: State = {
   fetchError: null,
   parseStatus: 'idle',
   parseError: null,
+  toasts: [],
 };
 
 function reducer(state: State, action: Action): State {
@@ -102,6 +112,10 @@ function reducer(state: State, action: Action): State {
       };
     case 'PARSE_ERROR':
       return { ...state, parseStatus: 'error', parseError: action.message };
+    case 'TOAST_ADD':
+      return { ...state, toasts: [...state.toasts, action.toast] };
+    case 'TOAST_DISMISS':
+      return { ...state, toasts: state.toasts.filter((toast) => toast.id !== action.id) };
     default:
       return state;
   }
@@ -225,12 +239,26 @@ export function useLearningTable() {
     try {
       const row = await parseManualEntry(input);
       dispatch({ type: 'PARSE_SUCCESS', row });
-    } catch (error) {
       dispatch({
-        type: 'PARSE_ERROR',
-        message: error instanceof Error ? error.message : 'Something went wrong.',
+        type: 'TOAST_ADD',
+        toast: {
+          id: crypto.randomUUID(),
+          type: 'success',
+          message: `Added "${row.title}" to your table.`,
+        },
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Something went wrong.';
+      dispatch({ type: 'PARSE_ERROR', message });
+      dispatch({
+        type: 'TOAST_ADD',
+        toast: { id: crypto.randomUUID(), type: 'error', message: `Couldn't parse that: ${message}` },
       });
     }
+  }, []);
+
+  const dismissToast = useCallback((id: string) => {
+    dispatch({ type: 'TOAST_DISMISS', id });
   }, []);
 
   return {
@@ -248,6 +276,7 @@ export function useLearningTable() {
     fetchError: state.fetchError,
     parseStatus: state.parseStatus,
     parseError: state.parseError,
+    toasts: state.toasts,
     addBlankRow,
     updateRow,
     deleteRow,
@@ -255,6 +284,7 @@ export function useLearningTable() {
     setSort,
     fetchSuggestionsForFocus,
     submitManualEntry,
+    dismissToast,
     retryInit: loadArticles,
   };
 }

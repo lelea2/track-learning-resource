@@ -25,24 +25,31 @@ articlesRouter.post('/', async (req, res) => {
 });
 
 articlesRouter.post('/parse', async (req, res) => {
+  const { url, rawText } = req.body as { url?: string; rawText?: string };
+  console.log('[POST /api/articles/parse] request received', {
+    url,
+    rawTextLength: rawText?.length ?? 0,
+  });
+
   try {
     await simulateUpstreamCall('Could not parse that input right now. Please try again.');
   } catch (error) {
+    console.error('[POST /api/articles/parse] simulateUpstreamCall failed:', error);
     res.status(502).json({ error: error instanceof Error ? error.message : 'Unknown error' });
     return;
   }
-
-  const { url, rawText } = req.body as { url?: string; rawText?: string };
 
   let parsed;
   try {
     parsed = await getContentParser().parse({ url, rawText });
   } catch (error) {
+    console.error('[POST /api/articles/parse] getContentParser().parse() failed:', error);
     res.status(502).json({
       error: error instanceof Error ? error.message : 'Could not parse that input right now.',
     });
     return;
   }
+  console.log('[POST /api/articles/parse] parsed fields:', parsed);
 
   const now = new Date().toISOString();
   const row: LearningRow = {
@@ -52,9 +59,11 @@ articlesRouter.post('/parse', async (req, res) => {
     createdAt: now,
     statusUpdatedAt: now,
     ...parsed,
+    ...(!url && rawText ? { noteContent: rawText } : {}),
   };
 
   const created = await getRepository().create(row);
+  console.log(`[POST /api/articles/parse] created row ${created.id}`);
   res.status(201).json(created);
 });
 

@@ -1,6 +1,7 @@
 import type { LearningRow } from '../../types';
 import { COLUMNS } from './columns';
 import { EditableCell } from './EditableCell';
+import { LongTextCell } from './LongTextCell';
 import { SelectCell } from './SelectCell';
 import { TitleUrlCell } from './TitleUrlCell';
 
@@ -37,6 +38,13 @@ export function TableRow({ row, onUpdate, onDelete }: TableRowProps) {
                 onCommit={(next) => onUpdate(row.id, { [key]: next } as Partial<LearningRow>)}
               />
             )}
+            {column.type === 'longText' && (
+              <LongTextCell
+                value={String(value)}
+                ariaLabel={ariaLabel}
+                onCommit={(next) => onUpdate(row.id, { [key]: next } as Partial<LearningRow>)}
+              />
+            )}
             {column.type === 'number' && (
               <EditableCell
                 type="number"
@@ -59,24 +67,16 @@ export function TableRow({ row, onUpdate, onDelete }: TableRowProps) {
               <TitleUrlCell
                 title={row.title}
                 url={row.url}
+                noteContent={row.noteContent}
                 rowLabel={row.title || 'row'}
                 onCommitTitle={(next) => onUpdate(row.id, { title: next })}
                 onCommitUrl={(next) => onUpdate(row.id, { url: next })}
+                onDelete={() => onDelete(row.id)}
               />
             )}
           </td>
         );
       })}
-      <td className="p-0 align-top">
-        <button
-          type="button"
-          aria-label={`Delete ${row.title || 'row'}`}
-          onClick={() => onDelete(row.id)}
-          className="m-1 rounded px-2 py-1 text-xs text-slate-400 hover:bg-rose-50 hover:text-rose-600"
-        >
-          Delete
-        </button>
-      </td>
     </tr>
   );
 }

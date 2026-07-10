@@ -1,11 +1,12 @@
 import { useLearningTable } from './state/useLearningTable';
 import { Table } from './components/Table/Table';
 import { Toolbar } from './components/Toolbar/Toolbar';
-import { FetchSuggestionsPanel } from './components/FetchSuggestions/FetchSuggestionsPanel';
+// import { FetchSuggestionsPanel } from './components/FetchSuggestions/FetchSuggestionsPanel';
 import { ManualEntryForm } from './components/ManualEntry/ManualEntryForm';
 import { StudyPlanPanel } from './components/StudyPlanPanel/StudyPlanPanel';
 import { MetricsBar } from './components/MetricsBar/MetricsBar';
 import { ProgressChart } from './components/ProgressChart/ProgressChart';
+import { ToastStack } from './components/Toast/ToastStack';
 
 function App() {
   const {
@@ -19,24 +20,26 @@ function App() {
     sourceOptions,
     initStatus,
     initError,
-    fetchStatus,
-    fetchError,
+    // fetchStatus,
+    // fetchError,
     parseStatus,
     parseError,
+    toasts,
     addBlankRow,
     updateRow,
     deleteRow,
     setFilters,
     setSort,
-    fetchSuggestionsForFocus,
+    // fetchSuggestionsForFocus,
     submitManualEntry,
+    dismissToast,
     retryInit,
   } = useLearningTable();
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       <header className="border-b border-slate-200 bg-white px-6 py-4">
-        <h1 className="text-lg font-semibold">AI Learning Radar</h1>
+        <h1 className="text-lg font-semibold">Learning Radar</h1>
         <p className="text-sm text-slate-500">
           Turn scattered learning links into a structured, sortable study tracker.
         </p>
@@ -70,18 +73,16 @@ function App() {
 
             <ProgressChart dailyProgress={dailyProgress} />
 
-            <div className="grid gap-4 md:grid-cols-2">
-              <FetchSuggestionsPanel
-                status={fetchStatus}
-                error={fetchError}
-                onFetch={fetchSuggestionsForFocus}
-              />
-              <ManualEntryForm
-                status={parseStatus}
-                error={parseError}
-                onSubmit={submitManualEntry}
-              />
-            </div>
+            {/* <FetchSuggestionsPanel
+              status={fetchStatus}
+              error={fetchError}
+              onFetch={fetchSuggestionsForFocus}
+            /> */}
+            <ManualEntryForm
+              status={parseStatus}
+              error={parseError}
+              onSubmit={submitManualEntry}
+            />
 
             <Toolbar
               filters={filters}
@@ -103,6 +104,8 @@ function App() {
           </>
         )}
       </main>
+
+      <ToastStack toasts={toasts} onDismiss={dismissToast} />
     </div>
   );
 }

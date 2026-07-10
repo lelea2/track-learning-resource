@@ -7,7 +7,7 @@ import {
   STUDY_STATUS_OPTIONS,
 } from '../../types';
 
-export type ColumnType = 'text' | 'number' | 'select' | 'titleUrl' | 'readonly';
+export type ColumnType = 'text' | 'longText' | 'number' | 'select' | 'titleUrl' | 'readonly';
 
 export interface ColumnDef {
   key: keyof LearningRow;
@@ -54,6 +54,6 @@ export const COLUMNS: ColumnDef[] = [
   },
   { key: 'estimatedTime', label: 'Est. Time (min)', type: 'number', width: 'min-w-28' },
   { key: 'interviewRelevance', label: 'Interview Relevance', type: 'number', width: 'min-w-24' },
-  { key: 'keyTakeaway', label: 'Key Takeaway', type: 'text', width: 'min-w-64' },
+  { key: 'keyTakeaway', label: 'Key Takeaway', type: 'longText', width: 'min-w-80' },
   { key: 'nextAction', label: 'Next Action', type: 'text', width: 'min-w-56' },
 ];

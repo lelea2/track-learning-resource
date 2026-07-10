@@ -14,6 +14,8 @@ import type { ChatAgent } from './agents/ChatAgent';
 import { OpenAIChatAgent } from './agents/OpenAIChatAgent';
 import { fetchPageText } from './fetchPageText';
 
+type ParseMode = 'url' | 'note';
+
 interface ModelOutput {
   title?: string;
   summary?: string;
@@ -30,30 +32,7 @@ const TOPIC_GUIDE = LEARNING_FOCUS_OPTIONS.map(
   (key) => `- "${key}": ${LEARNING_FOCUS_LABELS[key]}`,
 ).join('\n');
 
-const SYSTEM_PROMPT = `You are an assistant that reads technical articles or notes for a
-software engineer prepping for interviews and catalogs them for a learning
-tracker. You are given the actual fetched content of an article (or a raw
-note) — base every field ONLY on that content, not on the title or URL alone.
-
-Work through these steps:
-1. Read the content and write a concise 2-4 sentence summary of what it
-   actually covers.
-2. From that summary, pick the single best-matching topic (use the key, not
-   the label):
-${TOPIC_GUIDE}
-3. From the same summary, grade how difficult the material is for a working
-   software engineer: one of ${JSON.stringify(DIFFICULTY_OPTIONS)}.
-   Beginner = introductory/definitional, Intermediate = assumes working
-   knowledge, Advanced = assumes deep familiarity or covers edge cases/internals.
-4. Extract the single most useful, concrete takeaway a reader should
-   remember (keyTakeaway) — grounded in specifics from the content, not a
-   generic restatement of the title.
-5. Suggest a short, concrete nextAction for someone studying this.
-6. Estimate priority (${JSON.stringify(PRIORITY_OPTIONS)}) and
-   interviewRelevance (0-100) for interview prep value, and estimatedTime
-   in minutes (5-90) to read/study it.
-
-Respond with strict JSON only (no prose, no markdown fences) matching this
+const RESPONSE_SHAPE = `Respond with strict JSON only (no prose, no markdown fences) matching this
 shape:
 {
   "title": string,
@@ -66,6 +45,68 @@ shape:
   "keyTakeaway": string,
   "nextAction": string
 }`;
+
+/** Used when the input is a URL — content was fetched from the live page. */
+const URL_SYSTEM_PROMPT = `You are an assistant that reads technical articles for a
+software engineer prepping for interviews and catalogs them for a learning
+tracker. You are given the actual fetched content of the article at the
+given URL — base every field ONLY on that content, not on the title or URL
+alone.
+
+Work through these steps:
+1. Read the content and write a concise 2-4 sentence summary of what it
+   actually covers.
+2. From that summary, pick the single best-matching topic (use the key, not
+   the label):
+${TOPIC_GUIDE}
+3. From the same summary, grade how difficult the material is for a working
+   software engineer: one of ${JSON.stringify(DIFFICULTY_OPTIONS)}.
+   Beginner = introductory/definitional, Intermediate = assumes working
+   knowledge, Advanced = assumes deep familiarity or covers edge cases/internals.
+4. Extract detailed key takeaways that summarize the article as a whole
+   (keyTakeaway) — write 3-5 concrete, specific points a reader should
+   remember, each grounded in specifics from the content (names, numbers,
+   techniques, tradeoffs), not generic restatements of the title. Format
+   keyTakeaway as those points joined with newlines, each prefixed with
+   "- ", so it reads as a short scannable summary rather than one sentence.
+5. Suggest a short, concrete nextAction for someone studying this.
+6. Estimate priority (${JSON.stringify(PRIORITY_OPTIONS)}) and
+   interviewRelevance (0-100) for interview prep value, and estimatedTime
+   in minutes (5-90) to read/study it.
+
+${RESPONSE_SHAPE}`;
+
+/**
+ * Used when the input is a pasted note — there's no URL to fetch, the text
+ * below IS the user's own note verbatim. The job here is to condense and
+ * classify what they already wrote, not to analyze an external article.
+ */
+const NOTE_SYSTEM_PROMPT = `You are an assistant that helps a software engineer prepping for
+interviews catalog their own scratch notes into a learning tracker. You are
+given a note the user pasted in themselves — base every field ONLY on that
+note's content, not on any assumed external source.
+
+Work through these steps:
+1. Read the note and write a concise 2-4 sentence summary of what it says.
+2. From that summary, pick the single best-matching topic (use the key, not
+   the label):
+${TOPIC_GUIDE}
+3. From the same summary, grade how difficult the material is for a working
+   software engineer: one of ${JSON.stringify(DIFFICULTY_OPTIONS)}.
+   Beginner = introductory/definitional, Intermediate = assumes working
+   knowledge, Advanced = assumes deep familiarity or covers edge cases/internals.
+4. Write keyTakeaway as a faithful, condensed summary of the note itself —
+   restate what the user already wrote in their own note more concisely, in
+   their voice, grounded in the specifics they actually included. If the
+   note covers multiple distinct points, format keyTakeaway as those points
+   joined with newlines, each prefixed with "- "; if it's a single point, a
+   short paragraph is fine. Never invent details the note doesn't contain.
+5. Suggest a short, concrete nextAction for someone studying this.
+6. Estimate priority (${JSON.stringify(PRIORITY_OPTIONS)}) and
+   interviewRelevance (0-100) for interview prep value, and estimatedTime
+   in minutes (5-90) to review/study it.
+
+${RESPONSE_SHAPE}`;
 
 /**
  * Real LLM-backed ContentParser: fetches the article at the given URL (or
@@ -83,7 +124,9 @@ export class OpenAIContentParser implements ContentParser {
   }
 
   async parse(input: ContentParserInput): Promise<ContentParserResult> {
+    const mode: ParseMode = input.url ? 'url' : 'note';
     console.log('[OpenAIContentParser] parse() called with', {
+      mode,
       url: input.url,
       hasRawText: Boolean(input.rawText),
       title: input.title,
@@ -91,15 +134,16 @@ export class OpenAIContentParser implements ContentParser {
     });
 
     const content = await gatherContent(input);
-    const source = getSiteHost(input.url) ?? MANUAL_SOURCE;
+    const source = mode === 'url' ? getSiteHost(input.url) ?? MANUAL_SOURCE : MANUAL_SOURCE;
     console.log(
-      `[OpenAIContentParser] gathered ${content.length} chars from ${input.url ? 'URL fetch' : 'rawText'} (source=${source})`,
+      `[OpenAIContentParser] gathered ${content.length} chars in "${mode}" mode (source=${source})`,
     );
     console.log(`[OpenAIContentParser] content preview: ${content.slice(0, 300)}${content.length > 300 ? '…' : ''}`);
 
+    const systemPrompt = mode === 'url' ? URL_SYSTEM_PROMPT : NOTE_SYSTEM_PROMPT;
     const raw = await this.agent.complete([
-      { role: 'system', content: SYSTEM_PROMPT },
-      { role: 'user', content: buildUserMessage(input, content) },
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: buildUserMessage(input, content, mode) },
     ]);
     console.log('[OpenAIContentParser] raw agent response:', raw);
 
@@ -132,11 +176,12 @@ async function gatherContent(input: ContentParserInput): Promise<string> {
   throw new Error('Provide a URL or note text to parse.');
 }
 
-function buildUserMessage(input: ContentParserInput, content: string): string {
+function buildUserMessage(input: ContentParserInput, content: string, mode: ParseMode): string {
+  const contentLabel = mode === 'url' ? 'Content' : 'Note';
   return [
     input.title ? `Known title: ${input.title}` : null,
     input.topicOverride ? `Preferred topic (use this exactly): ${input.topicOverride}` : null,
-    `Content:\n${content}`,
+    `${contentLabel}:\n${content}`,
   ]
     .filter(Boolean)
     .join('\n\n');

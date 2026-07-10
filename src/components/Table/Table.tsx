@@ -26,7 +26,6 @@ export function Table({ rows, totalRowCount, onUpdate, onDelete, onAddRow }: Tab
                 {column.label}
               </th>
             ))}
-            <th className="px-1.5 py-2">Actions</th>
           </tr>
         </thead>
         <tbody>
